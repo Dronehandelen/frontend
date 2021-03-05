@@ -30,7 +30,6 @@ jobs:
             - checkout
             - attach_workspace:
                   at: .
-            - run: gcloud auth configure-docker
             - docker/build:
                   cache_from: ${ORGANIZATION_NAME}/${PROJECT_NAME}:latest
                   image: ${ORGANIZATION_NAME}/${PROJECT_NAME}
