@@ -1,0 +1,27 @@
+.cartProduct {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid #dedede;
+    padding: 10px;
+    margin-bottom: 5px;
+}
+
+.imageWrapper {
+    height: 80px;
+    width: 100px;
+    & > img {
+        max-height: 100%;
+        max-width: 100%;
+    }
+}
+
+.title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.input {
+    & input {
+        max-width: 70px;
+    }
+}

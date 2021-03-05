@@ -1,0 +1,44 @@
+import React from 'react';
+import AlternativeWrapper from '../AlternativeWrapper.jsx';
+import gql from 'graphql-tag';
+import { useMutation } from 'react-apollo';
+
+const MUTATION = gql`
+    mutation StartVippsCheckout {
+        startVippsCheckout {
+            url
+        }
+    }
+`;
+
+export const handleVippsPayment = async (t, vippsVariables) => {
+    const response = await vippsVariables.startVippsCheckout();
+
+    window.location.href = response.data.startVippsCheckout.url;
+};
+
+export const useVippsVariables = () => {
+    const [startVippsCheckout] = useMutation(MUTATION);
+    return {
+        startVippsCheckout,
+    };
+};
+
+const Stripe = ({ selected, onSelect }) => {
+    return (
+        <AlternativeWrapper
+            title={
+                <img
+                    width="100"
+                    src="/vipps/vipps.svg"
+                    alt=""
+                    style={{ marginLeft: -15, marginTop: -10 }}
+                />
+            }
+            onSelect={onSelect}
+            selected={selected}
+        />
+    );
+};
+
+export default Stripe;
