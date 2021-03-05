@@ -52,12 +52,12 @@ workflows:
     build_push_deploy:
         jobs:
             - build:
-                  context: prod
+                  context: hub
                   filters:
                       branches:
                           only: master
             - build_image_and_push:
-                  context: prod
+                  context: hub
                   requires:
                       - build
                   filters:
