@@ -36,10 +36,10 @@ jobs:
                   tag: ${CIRCLE_SHA1},latest
                   extra_build_args: '--target prod'
             - docker/push:
-                  image: ${GOOGLE_PROJECT_ID}/${PROJECT_NAME}
+                  image: ${ORGANIZATION_NAME}/${PROJECT_NAME}
                   tag: ${CIRCLE_SHA1}
             - docker/push:
-                  image: ${GOOGLE_PROJECT_ID}/${PROJECT_NAME}
+                  image: ${ORGANIZATION_NAME}/${PROJECT_NAME}
                   tag: latest
 
 orbs:
