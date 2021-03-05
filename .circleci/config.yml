@@ -36,7 +36,7 @@ workflows:
                 tag: ${CIRCLE_SHA1},latest
                 extra_build_args: '--target prod'
                 docker-username: DOCKER_HUB_USERNAME
-                docker-password: $DOCKER_HUB_TOKEN
+                docker-password: DOCKER_HUB_TOKEN
                 context: hub
                 requires:
                     - build
