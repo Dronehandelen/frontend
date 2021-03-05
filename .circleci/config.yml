@@ -16,28 +16,6 @@ jobs:
                       - node_modules
                       - build
 
-    build_image_and_push:
-        docker:
-            - image: cimg/base:2020.01
-              auth:
-                username: $DOCKER_HUB_USERNAME
-                password: $DOCKER_HUB_TOKEN
-        environment:
-            - ORGANIZATION_NAME: 'dronehandelen'
-            - PROJECT_NAME: 'frontend'
-        steps:
-            - setup_remote_docker
-            - checkout
-            - attach_workspace:
-                  at: .
-            - docker/publish:
-                  cache_from: ${ORGANIZATION_NAME}/${PROJECT_NAME}:latest
-                  image: ${ORGANIZATION_NAME}/${PROJECT_NAME}
-                  tag: ${CIRCLE_SHA1},latest
-                  extra_build_args: '--target prod'
-                  docker-username: DOCKER_HUB_USERNAME
-                  docker-password: $DOCKER_HUB_TOKEN
-
 orbs:
     node: circleci/node@4.1.0
     docker: circleci/docker@1.5.0
@@ -51,10 +29,17 @@ workflows:
                   filters:
                       branches:
                           only: master
-            - build_image_and_push:
-                  context: hub
-                  requires:
-                      - build
-                  filters:
-                      branches:
-                          only: master
+            - docker/publish:
+                attach-at: ./
+                cache_from: ${ORGANIZATION_NAME}/${PROJECT_NAME}:latest
+                image: ${ORGANIZATION_NAME}/${PROJECT_NAME}
+                tag: ${CIRCLE_SHA1},latest
+                extra_build_args: '--target prod'
+                docker-username: DOCKER_HUB_USERNAME
+                docker-password: $DOCKER_HUB_TOKEN
+                context: hub
+                requires:
+                    - build
+                filters:
+                    branches:
+                        only: master
