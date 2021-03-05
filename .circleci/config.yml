@@ -31,8 +31,8 @@ workflows:
                           only: master
             - docker/publish:
                 attach-at: ./
-                cache_from: ${ORGANIZATION_NAME}/${PROJECT_NAME}:latest
-                image: ${ORGANIZATION_NAME}/${PROJECT_NAME}
+                cache_from: dronehandelen/frontend:latest
+                image: dronehandelen/frontend
                 tag: ${CIRCLE_SHA1},latest
                 extra_build_args: '--target prod'
                 docker-username: DOCKER_HUB_USERNAME
