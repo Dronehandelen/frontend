@@ -1,0 +1,16 @@
+replicaCount: 1
+name: frontend
+image: smth
+port: 3000
+config:
+    baseDomain: dronehandelen.no
+    apiUrl: https://api.dronehandelen.no
+    internalApiUrl: http://api
+    release:
+        hash: ""
+        date: ""
+    stripe:
+        publicKey: "smth"
+    sentry:
+        frontend: "smth"
+        ssr: "smth"

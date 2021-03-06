@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.name }}
+  labels:
+    app: {{ .Values.name }}
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 2
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: {{ .Values.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.name }}
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                        - {{ .Values.name }}
+                topologyKey: 'kubernetes.io/hostname'
+      containers:
+        - name: {{ .Values.name }}
+          image: {{ .Values.image }}
+          env:
+            - name: RAZZLE_API_URL
+              value: {{ .Values.config.apiUrl }}
+            - name: RAZZLE_API_INTERNAL_URL
+              value: {{ .Values.config.internalApiUrl }}
+            - name: RAZZLE_STRIPE_PUBLIC_KEY
+              value: {{ .Values.config.stripe.publicKey }}
+            - name: RAZZLE_RELEASE_HASH
+              value: {{ .Values.config.release.hash }}
+            - name: RAZZLE_RELEASE_DATE
+              value: {{ .Values.config.release.date }}
+            - name: RAZZLE_SENTRY_FRONTEND
+              value: {{ .Values.config.sentry.frontend | quote }}
+            - name: RAZZLE_SENTRY_SSR
+              value: {{ .Values.config.sentry.ssr | quote }}
+          resources:
+            requests:
+              memory: '256Mi'
+              cpu: '50m'
+            limits:
+              memory: '1024Mi'
+              cpu: '500m'
+          ports:
+            - name: http
+              containerPort: 3000
+              protocol: TCP

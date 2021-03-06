@@ -1,0 +1,22 @@
+kind: Ingress
+apiVersion: networking.k8s.io/v1beta1
+metadata:
+  name: {{ .Values.name }}-ingress
+  annotations:
+    cert-manager.io/cluster-issuer: 'letsencrypt-prod'
+    kubernetes.io/ingress.class: 'nginx'
+    nginx.ingress.kubernetes.io/from-to-www-redirect: 'true'
+spec:
+  tls:
+    - hosts:
+        - www.{{ .Values.config.baseDomain }}
+        - {{ .Values.config.baseDomain }}
+      secretName: www-tls
+  rules:
+    - host: www.{{ .Values.config.baseDomain }}
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: {{ .Values.name }}
+              servicePort: 80

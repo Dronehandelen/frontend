@@ -16,6 +16,65 @@ jobs:
                       - node_modules
                       - build
 
+    sentry:
+        docker:
+            - image: getsentry/sentry-cli
+        environment:
+            - SENTRY_PROJECT_NAME: 'www-frontend'
+            - SENTRY_PROJECT_NAME_SSR: 'www-frontend-ssr'
+        steps:
+            - checkout
+            - attach_workspace:
+                  at: .
+            - run:
+                  name: Setup sentry
+                  command: |
+                      sentry-cli --auth-token $SENTRY_AUTH_TOKEN releases new -p $SENTRY_PROJECT_NAME $CIRCLE_SHA1
+                      sentry-cli --auth-token $SENTRY_AUTH_TOKEN releases set-commits --auto $CIRCLE_SHA1
+                      sentry-cli --auth-token $SENTRY_AUTH_TOKEN releases -p $SENTRY_PROJECT_NAME files $CIRCLE_SHA1 upload-sourcemaps ./build/public
+                      sentry-cli --auth-token $SENTRY_AUTH_TOKEN releases -p $SENTRY_PROJECT_NAME finalize $CIRCLE_SHA1
+                      sentry-cli --auth-token $SENTRY_AUTH_TOKEN releases deploys $CIRCLE_SHA1 new -e production
+
+                      sentry-cli --auth-token $SENTRY_AUTH_TOKEN releases new -p $SENTRY_PROJECT_NAME_SSR $CIRCLE_SHA1
+                      sentry-cli --auth-token $SENTRY_AUTH_TOKEN releases set-commits --auto $CIRCLE_SHA1
+                      sentry-cli --auth-token $SENTRY_AUTH_TOKEN releases -p $SENTRY_PROJECT_NAME_SSR files $CIRCLE_SHA1 upload-sourcemaps ./build/public
+                      sentry-cli --auth-token $SENTRY_AUTH_TOKEN releases -p $SENTRY_PROJECT_NAME_SSR finalize $CIRCLE_SHA1
+                      sentry-cli --auth-token $SENTRY_AUTH_TOKEN releases deploys $CIRCLE_SHA1 new -e production
+
+    deploychart:
+        docker:
+            - image: google/cloud-sdk
+        environment:
+            - NAMESPACE: 'production'
+        steps:
+            - checkout
+            - attach_workspace:
+                  at: .
+            - helm/install-helm-client:
+                  version: v3.0.2
+            - gcp-cli/install
+            - gcp-cli/initialize:
+                  gcloud-service-key: GCLOUD_SERVICE_KEY
+                  google-compute-zone: GCP_COMPUTE_ZONE
+                  google-project-id: GCP_PROJECT_ID
+            - run: gcloud --quiet container clusters get-credentials ${GCP_CLUSTER_NAME}
+            - run: kubectl create namespace ${NAMESPACE} || true
+            - run:
+                  name: Deploy helm chart
+                  command: |
+                      export RELEASE_DATE=`date "+%d. %b %Y kl. %H.%M"`
+
+                      helm upgrade --install frontend \
+                          --set image="dronehandelen/frontend:${CIRCLE_SHA1}" \
+                          --set config.apiUrl="$URL_API" \
+                          --set config.stripe.publicKey="$STRIPE_PUBLIC_KEY" \
+                          --set config.release.hash="$CIRCLE_SHA1" \
+                          --set config.release.date="$RELEASE_DATE" \
+                          --set config.sentry.frontend="$FRONTEND_SENTRY" \
+                          --set config.sentry.ssr="$FRONTEND_SENTRY_SSR" \
+                          --namespace ${NAMESPACE} \
+                          ./chart
+
 orbs:
     node: circleci/node@4.1.0
     docker: circleci/docker@1.5.0
@@ -37,9 +96,29 @@ workflows:
                 extra_build_args: '--target prod'
                 docker-username: DOCKER_HUB_USERNAME
                 docker-password: DOCKER_HUB_TOKEN
-                context: hub
+                context:
+                    - hub
                 requires:
                     - build
                 filters:
                     branches:
                         only: master
+            - deploychart:
+                  context:
+                      - GCP
+                      - prod-urls
+                      - prod-stripe
+                      - prod-frontend
+                  requires:
+                      - docker/publish
+                  filters:
+                      branches:
+                          only: master
+            - sentry:
+                  context:
+                      - sentry
+                  requires:
+                      - deploychart
+                  filters:
+                      branches:
+                          only: master
