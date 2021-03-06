@@ -39,16 +39,25 @@ spec:
               value: {{ .Values.config.apiUrl }}
             - name: RAZZLE_API_INTERNAL_URL
               value: {{ .Values.config.internalApiUrl }}
-            - name: RAZZLE_STRIPE_PUBLIC_KEY
-              value: {{ .Values.config.stripe.publicKey }}
             - name: RAZZLE_RELEASE_HASH
               value: {{ .Values.config.release.hash }}
             - name: RAZZLE_RELEASE_DATE
               value: {{ .Values.config.release.date }}
+            - name: RAZZLE_STRIPE_PUBLIC_KEY
+              valueFrom:
+                configMapKeyRef:
+                  name: stripe-config
+                  key: publicKey
             - name: RAZZLE_SENTRY_FRONTEND
-              value: {{ .Values.config.sentry.frontend | quote }}
+              valueFrom:
+                configMapKeyRef:
+                  name: frontend-config
+                  key: sentryUrl
             - name: RAZZLE_SENTRY_SSR
-              value: {{ .Values.config.sentry.ssr | quote }}
+              valueFrom:
+                configMapKeyRef:
+                  name: frontend-config
+                  key: sentrySSRUrl
           resources:
             requests:
               memory: '256Mi'
