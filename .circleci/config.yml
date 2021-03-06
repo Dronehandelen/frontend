@@ -68,12 +68,8 @@ jobs:
 
                       helm upgrade --install frontend \
                           --set image="dronehandelen/frontend:${CIRCLE_SHA1}" \
-                          --set config.apiUrl="$URL_API" \
-                          --set config.stripe.publicKey="$STRIPE_PUBLIC_KEY" \
                           --set config.release.hash="$CIRCLE_SHA1" \
                           --set config.release.date="$RELEASE_DATE" \
-                          --set config.sentry.frontend="$FRONTEND_SENTRY" \
-                          --set config.sentry.ssr="$FRONTEND_SENTRY_SSR" \
                           --namespace ${NAMESPACE} \
                           ./chart
 
@@ -93,26 +89,23 @@ workflows:
                       branches:
                           only: master
             - docker/publish:
-                attach-at: ./
-                cache_from: dronehandelen/frontend:latest
-                image: dronehandelen/frontend
-                tag: ${CIRCLE_SHA1},latest
-                extra_build_args: '--target prod'
-                docker-username: DOCKER_HUB_USERNAME
-                docker-password: DOCKER_HUB_TOKEN
-                context:
-                    - hub
-                requires:
-                    - build
-                filters:
-                    branches:
-                        only: master
+                  attach-at: ./
+                  cache_from: dronehandelen/frontend:latest
+                  image: dronehandelen/frontend
+                  tag: ${CIRCLE_SHA1},latest
+                  extra_build_args: '--target prod'
+                  docker-username: DOCKER_HUB_USERNAME
+                  docker-password: DOCKER_HUB_TOKEN
+                  context:
+                      - hub
+                  requires:
+                      - build
+                  filters:
+                      branches:
+                          only: master
             - deploychart:
                   context:
                       - GCP
-                      - prod-urls
-                      - prod-stripe
-                      - prod-frontend
                   requires:
                       - docker/publish
                   filters:

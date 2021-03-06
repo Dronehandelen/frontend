@@ -36,7 +36,10 @@ spec:
           image: {{ .Values.image }}
           env:
             - name: RAZZLE_API_URL
-              value: {{ .Values.config.apiUrl }}
+              valueFrom:
+                configMapKeyRef:
+                  name: url-config
+                  key: apiUrl
             - name: RAZZLE_API_INTERNAL_URL
               value: {{ .Values.config.internalApiUrl }}
             - name: RAZZLE_RELEASE_HASH
