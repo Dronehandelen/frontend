@@ -29,6 +29,8 @@ jobs:
             - run:
                   name: Setup sentry
                   command: |
+                      echo $SENTRY_ORG
+                      sentry-cli repos --org $SENTRY_ORG list
                       sentry-cli --auth-token $SENTRY_AUTH_TOKEN releases new -p $SENTRY_PROJECT_NAME $CIRCLE_SHA1
                       sentry-cli --auth-token $SENTRY_AUTH_TOKEN releases set-commits --auto $CIRCLE_SHA1
                       sentry-cli --auth-token $SENTRY_AUTH_TOKEN releases -p $SENTRY_PROJECT_NAME files $CIRCLE_SHA1 upload-sourcemaps ./build/public
