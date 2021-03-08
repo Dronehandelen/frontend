@@ -55,6 +55,7 @@
         "sourcebuster": "^1.1.0",
         "store": "^2.0.12",
         "styled-components": "^5.2.1",
+        "web-vitals": "^1.1.0",
         "xml": "^1.0.1"
     },
     "scripts": {

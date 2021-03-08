@@ -9,6 +9,7 @@ import * as serviceWorker from './serviceWorker';
 import ApolloClientUtils from './helpers/apolloClient';
 import appConfig from './config/app.js';
 import tracking from './helpers/tracking.js';
+import './reportWebVitals';
 
 import { ApolloProvider } from '@apollo/client';
 import Cookies from 'js-cookie';
