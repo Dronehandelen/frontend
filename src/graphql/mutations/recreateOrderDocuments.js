@@ -1,5 +1,4 @@
-import { useMutation } from 'react-apollo';
-import gql from 'graphql-tag';
+import { useMutation, gql } from '@apollo/client';
 
 const MUTATION = gql`
     mutation RecreateOrderDocuments($orderId: Int!) {

@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import { gql } from '@apollo/client';
 import { productCardFragment } from '../Product/ProductCard';
 
 export const getProductQuery = gql`

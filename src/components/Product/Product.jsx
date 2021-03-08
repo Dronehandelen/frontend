@@ -4,7 +4,7 @@ import ProductListItem from './ProductListItem';
 import { productListItemFragment } from './ProductListItem';
 import { productCardFragment } from './ProductCard';
 import productContext from '../../contexts/product.js';
-import gql from 'graphql-tag';
+import { gql } from '@apollo/client';
 
 export const productFragment = gql`
     fragment ProductFragment on Product {

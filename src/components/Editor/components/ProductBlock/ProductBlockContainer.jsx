@@ -1,8 +1,7 @@
 import React from 'react';
-import gql from 'graphql-tag';
 import ProductBlock from './ProductBlock.jsx';
 import DefaultHookQuery from '../../../../containers/DefaultHookQuery.jsx';
-import { useQuery } from 'react-apollo';
+import { useQuery, gql } from '@apollo/client';
 
 export const getProductQuery = gql`
     query GetProduct($id: Int, $alias: String) {

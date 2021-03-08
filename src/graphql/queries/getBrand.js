@@ -1,5 +1,5 @@
-import { useQuery } from 'react-apollo';
-import gql from 'graphql-tag';
+import { useQuery } from '@apollo/client';
+import { gql } from '@apollo/client';
 
 const QUERY = gql`
     query GetBrandPageInfo($brandId: Int, $alias: String) {

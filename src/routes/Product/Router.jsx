@@ -2,7 +2,7 @@ import React from 'react';
 import NotFound from '../../components/NotFound.jsx';
 import DefaultHookQuery from '../../containers/DefaultHookQuery.jsx';
 import { Route, Switch } from 'react-router-dom';
-import { useQuery } from 'react-apollo';
+import { useQuery } from '@apollo/client';
 import ProductContainer, { getProductQuery } from './ProductContainer';
 import PackageProductsContainer from './PackageProductsContainer';
 

@@ -1,6 +1,5 @@
 import React from 'react';
-import gql from 'graphql-tag';
-import { useQuery } from 'react-apollo';
+import { useQuery, gql } from '@apollo/client';
 import ClientHeader from './ClientHeader.jsx';
 
 const HeaderQuery = gql`

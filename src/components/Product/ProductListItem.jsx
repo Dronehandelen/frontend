@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 import tracking from '../../helpers/tracking';
 import DiscountBobble from '../DiscountBobble';
 import NewBobble from '../NewBobble/NewBobble.jsx';
-import gql from 'graphql-tag';
+import { gql } from '@apollo/client';
 import BuyButton from '../BuyButton.jsx';
 import ProductStockStatus from '../ProductStockStatus.jsx';
 

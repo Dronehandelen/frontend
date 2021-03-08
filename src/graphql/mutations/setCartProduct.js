@@ -1,5 +1,5 @@
-import { useMutation } from 'react-apollo';
-import gql from 'graphql-tag';
+import { useMutation } from '@apollo/client';
+import { gql } from '@apollo/client';
 import cart from '../fragments/cart.js';
 import { QUERY } from '../queries/getCart.js';
 

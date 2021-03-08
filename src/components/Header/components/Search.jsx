@@ -8,8 +8,7 @@ import styled from 'styled-components';
 import sizeConfig from '../../../config/size.js';
 import useSearchLogging from '../../../hooks/useSearchLogging.js';
 import headerContext from '../../../contexts/header.js';
-import gql from 'graphql-tag';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery, gql } from '@apollo/client';
 import CompactListProduct, {
     compactListProductFragment,
 } from '../../Product/CompactListProduct.jsx';

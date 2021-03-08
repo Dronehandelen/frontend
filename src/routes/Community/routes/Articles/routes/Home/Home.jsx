@@ -1,9 +1,9 @@
 import React from 'react';
 import { Col, Container, Row } from 'reactstrap';
 import Helmet from '../../../../../../components/Helmet.jsx';
-import gql from 'graphql-tag';
+import { gql } from '@apollo/client';
 import DefaultHookQuery from '../../../../../../containers/DefaultHookQuery.jsx';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 import Article from './components/Article.jsx';
 
 const query = gql`

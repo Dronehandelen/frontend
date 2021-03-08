@@ -10,7 +10,7 @@ import ApolloClientUtils from './helpers/apolloClient';
 import appConfig from './config/app.js';
 import tracking from './helpers/tracking.js';
 
-import { ApolloProvider } from 'react-apollo';
+import { ApolloProvider } from '@apollo/client';
 import Cookies from 'js-cookie';
 import { ignoreErrors } from './helpers/sentry.js';
 

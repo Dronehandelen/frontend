@@ -2,10 +2,10 @@ import React from 'react';
 import Home from './Home';
 import Helmet from '../../components/Helmet.jsx';
 import windowHelper from '../../helpers/window';
-import gql from 'graphql-tag';
+import { gql } from '@apollo/client';
 import { productFragment } from '../../components/Product/Product.jsx';
 import DefaultHookQuery from '../../containers/DefaultHookQuery.jsx';
-import { useQuery } from 'react-apollo';
+import { useQuery } from '@apollo/client';
 
 const HomeQuery = gql`
     query HomeQuery {

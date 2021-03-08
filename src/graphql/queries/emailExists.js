@@ -1,5 +1,4 @@
-import { useLazyQuery } from 'react-apollo';
-import gql from 'graphql-tag';
+import { useLazyQuery, gql } from '@apollo/client';
 
 const EMAIL_EXISTS = gql`
     query EmailExists($email: String!) {

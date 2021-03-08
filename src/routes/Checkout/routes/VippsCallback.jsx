@@ -1,8 +1,8 @@
 import React from 'react';
 import queryString from 'query-string';
 import { Link, useLocation, useHistory } from 'react-router-dom';
-import gql from 'graphql-tag';
-import { useQuery } from 'react-apollo';
+import { gql } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import { Alert, Col, Container, Row, Spinner } from 'reactstrap';
 import tracking from '../../../helpers/tracking';
 

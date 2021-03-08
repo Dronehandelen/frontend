@@ -7,7 +7,7 @@ import AuthContext from '../../contexts/auth.js';
 import { Link, useLocation, useHistory } from 'react-router-dom';
 import Card from '../../components/Card.jsx';
 import CustomCardTitle from './components/CardTitle.jsx';
-import gql from 'graphql-tag';
+import { gql } from '@apollo/client';
 
 export const productReviewsFragment = gql`
     fragment ProductReviews on Product {

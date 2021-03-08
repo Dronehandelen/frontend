@@ -1,5 +1,5 @@
 import React from 'react';
-import gql from 'graphql-tag';
+import { gql } from '@apollo/client';
 import { useLocation } from 'react-router-dom';
 import { ProductListItem } from '../../../components/Product';
 import { productListItemFragment } from '../../../components/Product/ProductListItem';

@@ -7,8 +7,8 @@ import * as Sentry from '@sentry/react';
 import appConfig from '../../config/app.js';
 import tracking from '../../helpers/tracking';
 import getGraphqlError from '../../helpers/getGraphqlError.js';
-import gql from 'graphql-tag';
-import { useQuery } from 'react-apollo';
+import { gql } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import PaymentOptions from './components/PaymentOptions';
 import {
     handleStripePayment,

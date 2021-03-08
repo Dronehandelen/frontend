@@ -13,8 +13,8 @@ import DropDownItem from '../../../components/Dropdown/DropDownItem.jsx';
 import CardPreview from './CardPreview.jsx';
 import AddCardDropDownItem from './AddCardDropDownItem.jsx';
 import Checkbox from '../../../components/Checkbox/Checkbox.jsx';
-import gql from 'graphql-tag';
-import { useMutation } from 'react-apollo';
+import { gql } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import AuthContext from '../../../contexts/auth.js';
 
 const styledInput = css`

@@ -1,5 +1,5 @@
-import { useMutation } from 'react-apollo';
-import gql from 'graphql-tag';
+import { useMutation } from '@apollo/client';
+import { gql } from '@apollo/client';
 
 const QUERY = gql`
     mutation SendOrderTrackingEmail($orderId: Int!) {

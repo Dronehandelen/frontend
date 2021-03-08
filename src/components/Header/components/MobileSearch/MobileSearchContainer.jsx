@@ -1,7 +1,6 @@
 import React from 'react';
 import MobileSearch from './MobileSearch.jsx';
-import gql from 'graphql-tag';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery, gql } from '@apollo/client';
 import { useDebounce, useLockBodyScroll } from 'moment-hooks';
 import useSearchLogging from '../../../../hooks/useSearchLogging.js';
 import { compactListProductFragment } from '../../../Product/CompactListProduct.jsx';

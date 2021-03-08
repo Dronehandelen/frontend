@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import formatPrice from '../../helpers/formatPrice.js';
-import gql from 'graphql-tag';
+import { gql } from '@apollo/client';
 
 const Product = styled(Link)`
     display: flex;

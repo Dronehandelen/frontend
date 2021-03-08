@@ -1,6 +1,6 @@
 import React from 'react';
 import Reward from './Reward.jsx';
-import gql from 'graphql-tag';
+import { gql } from '@apollo/client';
 import usePaginatedQuery from '../../../../hooks/usePaginatedQuery.js';
 
 const latestEarnedRewardsQuery = gql`

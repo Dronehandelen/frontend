@@ -10,7 +10,7 @@ import NewBobble from '../../NewBobble/NewBobble.jsx';
 import Image from './Image.jsx';
 import BuyButton from '../../BuyButton.jsx';
 import ProductStockStatus from '../../ProductStockStatus.jsx';
-import gql from 'graphql-tag';
+import { gql } from '@apollo/client';
 
 export const productCardFragment = gql`
     fragment ProductCardFragment on Product {

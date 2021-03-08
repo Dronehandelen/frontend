@@ -1,13 +1,12 @@
 import App from './App';
 import React from 'react';
-import { ApolloProvider } from 'react-apollo';
+import { ApolloProvider, ApolloClient } from '@apollo/client';
 import { createHttpLink } from 'apollo-link-http';
 import { StaticRouter } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import express from 'express';
 import path from 'path';
 import { renderToString } from 'react-dom/server';
-import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { getDataFromTree } from '@apollo/react-ssr';
 import { ServerStyleSheet } from 'styled-components';

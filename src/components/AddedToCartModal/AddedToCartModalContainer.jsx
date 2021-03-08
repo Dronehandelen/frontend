@@ -6,7 +6,7 @@ import { useLockBodyScroll, useWindowSize } from 'moment-hooks';
 import { Transition } from 'react-transition-group';
 import AddedToCartModal from './AddedToCartModal.jsx';
 import DefaultHookQuery from '../../containers/DefaultHookQuery.jsx';
-import { useQuery } from 'react-apollo';
+import { useQuery } from '@apollo/client';
 import getProductQuery from './getProductQuery.js';
 import sizeConfig from '../../config/size.js';
 

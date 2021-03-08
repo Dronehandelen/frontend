@@ -1,5 +1,5 @@
 import xml from 'xml';
-import gql from 'graphql-tag';
+import { gql } from '@apollo/client';
 
 const GET_PRODUCTS = gql`
     query GetProducts($pagination: PaginationInput!) {

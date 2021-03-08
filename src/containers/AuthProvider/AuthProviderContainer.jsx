@@ -1,6 +1,6 @@
 import React from 'react';
-import { useQuery, useApolloClient } from 'react-apollo';
-import gql from 'graphql-tag';
+import { useQuery, useApolloClient } from '@apollo/client';
+import { gql } from '@apollo/client';
 
 import useLogoutMutation from '../../graphql/mutations/logout.js';
 import AuthProvider from './AuthProvider';
