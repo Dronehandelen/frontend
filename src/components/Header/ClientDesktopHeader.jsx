@@ -1,11 +1,10 @@
 import React from 'react';
-import { Navbar, Nav, NavItem, NavLink, Container } from 'reactstrap';
-import { Link } from 'react-router-dom';
+import { Navbar, Nav, Container } from 'reactstrap';
 import MyAccount from './components/MyAccount.jsx';
 import Cart from './components/Cart.jsx';
-import Search from './components/Search.jsx';
 import DesktopSubHeaderLinks from './components/DesktopSubHeaderLinks';
 import Brand from './components/Brand.jsx';
+import DesktopSearch from './components/DesktopSearch';
 
 const ClientHeader = ({ onLinkClick, categories, brands }) => {
     return (
@@ -13,7 +12,7 @@ const ClientHeader = ({ onLinkClick, categories, brands }) => {
             <Navbar color="light" light expand="lg">
                 <Container>
                     <Brand onClick={onLinkClick('logo')} />
-                    <Search />
+                    <DesktopSearch />
                     <Nav navbar className="ml-auto">
                         <MyAccount onLinkClick={onLinkClick} />
                         <Cart />

@@ -1,17 +1,8 @@
 import React from 'react';
-import { Input, Spinner } from 'reactstrap';
-import { Popover } from 'reactstrap';
-import { useDebounce, useWindowSize } from 'moment-hooks';
-import { Link, useHistory, useLocation } from 'react-router-dom';
+import { Input, Popover, Spinner } from 'reactstrap';
 import styled from 'styled-components';
-
-import sizeConfig from '../../../config/size.js';
-import useSearchLogging from '../../../hooks/useSearchLogging.js';
-import headerContext from '../../../contexts/header.js';
-import { useQuery, gql } from '@apollo/client';
-import CompactListProduct, {
-    compactListProductFragment,
-} from '../../Product/CompactListProduct.jsx';
+import { Link, useHistory } from 'react-router-dom';
+import CompactListProduct from '../../../Product/CompactListProduct';
 
 const StyledPopover = styled(Popover)`
     .popover {
@@ -71,70 +62,22 @@ const Background = styled.div`
     z-index: 10;
 `;
 
-const GET_SEARCH = gql`
-    query GetBrands(
-        $filters: ProductFilters
-        $brandFilters: BrandFilters
-        $pagination: PaginationInput!
-        $orderBy: String!
-    ) {
-        brands(filters: $brandFilters) {
-            id
-            name
-            alias
-        }
-        products(
-            filters: $filters
-            pagination: $pagination
-            orderBy: $orderBy
-        ) {
-            edges {
-                node {
-                    ...CompactListProductFragment
-                }
-            }
-        }
-    }
-    ${compactListProductFragment}
-`;
-
-const Search = () => {
-    const ref = React.useRef();
-    const { height: headerHeight } = React.useContext(headerContext);
-
-    const [input, setInput] = React.useState('');
-    const [expanded, setExpanded] = React.useState(false);
-
-    const debouncedInput = useDebounce(input, 500);
-    const { width } = useWindowSize();
-
+const DesktopSearch = ({
+    input,
+    setInput,
+    debouncedInput,
+    expanded,
+    headerHeight,
+    setExpanded,
+    sizeConfig,
+    loading,
+    data,
+    width,
+}) => {
     const history = useHistory();
-    const location = useLocation();
-
-    const { loading, data } = useQuery(GET_SEARCH, {
-        variables: {
-            brandFilters: {
-                search: debouncedInput,
-            },
-            filters: {
-                search: debouncedInput,
-                shouldShowPackages: true,
-            },
-            pagination: {
-                count: 6,
-            },
-            orderBy: 'searchRank',
-        },
-    });
-
-    React.useEffect(() => {
-        setExpanded(false);
-    }, [location]);
-
-    useSearchLogging(input);
 
     return (
-        <div className="ml-4 d-none d-md-block" ref={ref}>
+        <div className="ml-4 d-none d-md-block">
             <Input
                 id="header-search"
                 placeholder="Søk for produkter..."
@@ -149,6 +92,7 @@ const Search = () => {
                 bsSize="sm"
                 style={{ width: 350 }}
                 onFocus={() => setExpanded(true)}
+                autoFocus
             />
             {debouncedInput !== '' && width >= sizeConfig.md && (
                 <>
@@ -213,4 +157,4 @@ const Search = () => {
     );
 };
 
-export default Search;
+export default DesktopSearch;
