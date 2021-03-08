@@ -25,6 +25,7 @@
         "express": "^4.17.1",
         "font-awesome": "^4.7.0",
         "get-youtube-id": "^1.0.1",
+        "graphql": "^15.5.0",
         "i18next": "^19.9.1",
         "i18next-browser-languagedetector": "^6.0.1",
         "isomorphic-fetch": "^3.0.0",
