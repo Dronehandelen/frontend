@@ -12,6 +12,7 @@ import NewBobble from '../NewBobble/NewBobble.jsx';
 import { gql } from '@apollo/client';
 import BuyButton from '../BuyButton.jsx';
 import ProductStockStatus from '../ProductStockStatus.jsx';
+import LazyLoad from 'react-lazyload';
 
 const StyledProductListItem = styled(Link)`
     position: relative;
@@ -45,7 +46,7 @@ const StyledProductListItem = styled(Link)`
     }
 `;
 
-const ImageWrapper = styled.div`
+const ImageWrapper = styled(LazyLoad)`
     flex: 1;
     max-height: 100%;
 
@@ -140,7 +141,7 @@ const ProductListItem = ({
                 <NewBobble top={10} />
             )}
             <div className="content">
-                <ImageWrapper>
+                <ImageWrapper once>
                     <img src={imageUrl} alt={product.title} />
                 </ImageWrapper>
                 <div className="pl-4 d-flex flex-column justify-content-between">

@@ -1,5 +1,6 @@
 import React from 'react';
 import cn from 'classnames';
+import LazyLoad from 'react-lazyload';
 import styles from './product.module.scss';
 import { Link } from 'react-router-dom';
 import augmentProduct, { promotion } from '../../../helpers/product.js';
@@ -88,7 +89,9 @@ const ProductCard = ({
                 />
             )}
             {!showDiscountBobble && augmentedProduct.isNew() && <NewBobble />}
-            <Image product={product} imageHeight={imageHeight} />
+            <LazyLoad height={imageHeight} once>
+                <Image product={product} imageHeight={imageHeight} />
+            </LazyLoad>
             <div className="flex-grow-1">
                 <div className="mt-2">
                     <strong>{product.title}</strong>

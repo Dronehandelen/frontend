@@ -5,7 +5,7 @@ import { getDefaultProductImageUrl } from '../../../helpers/product.js';
 const ProductImage = styled.div`
     height: ${(props) => props.imageHeight}px;
     max-width: 100%;
-    background: url("${(props) => props.src}") center center no-repeat;
+    background: url('${(props) => props.src}') center center no-repeat;
     background-size: contain;
 `;
 
