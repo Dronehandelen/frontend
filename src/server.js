@@ -228,7 +228,7 @@ const render = ({
             })(window, document, 'script', 'dataLayer', 'GTM-WRSCVQC');
         </script>
         <!-- End Google Tag Manager -->
-        <script src="https://js.stripe.com/v3/"></script>
+        <script async src="https://js.stripe.com/v3/"></script>
         ${
             assets.client.css
                 ? `<link rel="stylesheet" href="${assets.client.css}">`
@@ -242,16 +242,6 @@ const render = ({
         ${sheet ? sheet.getStyleTags() : ''}
     </head>
     <body>
-        <!-- Google Tag Manager (noscript) -->
-        <noscript
-            ><iframe
-                src="https://www.googletagmanager.com/ns.html?id=GTM-WRSCVQC"
-                height="0"
-                width="0"
-                style="display:none;visibility:hidden"
-            ></iframe
-        ></noscript>
-        <!-- End Google Tag Manager (noscript) -->
         <div id="root">${content}</div>
         <script>
                 window.__APOLLO_STATE__=${JSON.stringify(initialState).replace(
