@@ -1,7 +1,7 @@
 FROM node:14 as prod
 WORKDIR /app
 COPY . .
-RUN mkdir -p build; rm build/public/static/**/*.map
+RUN mkdir -p build;
 EXPOSE 3000
 CMD yarn start:prod
 
