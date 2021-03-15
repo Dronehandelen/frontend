@@ -12,7 +12,7 @@ const Background = styled.div`
     top: ${(props) => props.top}px;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.4);
     z-index: 10;
 `;
 
@@ -22,6 +22,7 @@ const Wrapper = styled.div`
     background-color: white;
     color: black;
     display: flex;
+    box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.8);
 `;
 
 const Column = styled.div`

@@ -38,7 +38,7 @@ const Row = ({
 
         const timeout = setTimeout(() => {
             onExpandChildCategories();
-        }, 500);
+        }, 300);
 
         return () => clearTimeout(timeout);
     }, [isHovered]);
