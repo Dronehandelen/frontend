@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { getDefaultProductImageUrl } from '../../../helpers/product.js';
+import { getImageUrlWithMaxSize } from '../../../helpers/image';
 
 const ProductImage = styled.div`
     height: ${(props) => props.imageHeight}px;
@@ -12,5 +13,10 @@ const ProductImage = styled.div`
 export default ({ product, imageHeight = 200 }) => {
     let imgUrl = getDefaultProductImageUrl(product);
 
-    return <ProductImage src={imgUrl} imageHeight={imageHeight} />;
+    return (
+        <ProductImage
+            src={getImageUrlWithMaxSize(imgUrl, { maxHeight: imageHeight })}
+            imageHeight={imageHeight}
+        />
+    );
 };

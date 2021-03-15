@@ -61,7 +61,7 @@ const ProductCard = ({
     position = null,
     listName = null,
     prefix = '',
-    imageHeight,
+    imageHeight = 200,
 }) => {
     const { hasPromotion, promotionPresent, shopVIP } = promotion(product);
     const augmentedProduct = augmentProduct(product);

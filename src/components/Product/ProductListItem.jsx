@@ -13,6 +13,7 @@ import { gql } from '@apollo/client';
 import BuyButton from '../BuyButton.jsx';
 import ProductStockStatus from '../ProductStockStatus.jsx';
 import LazyLoad from 'react-lazyload';
+import { getImageUrlWithMaxSize } from '../../helpers/image';
 
 const StyledProductListItem = styled(Link)`
     position: relative;
@@ -142,7 +143,12 @@ const ProductListItem = ({
             )}
             <div className="content">
                 <ImageWrapper once>
-                    <img src={imageUrl} alt={product.title} />
+                    <img
+                        src={getImageUrlWithMaxSize(imageUrl, {
+                            maxHeight: 200,
+                        })}
+                        alt={product.title}
+                    />
                 </ImageWrapper>
                 <div className="pl-4 d-flex flex-column justify-content-between">
                     <div>

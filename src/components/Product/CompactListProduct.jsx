@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import formatPrice from '../../helpers/formatPrice.js';
 import { gql } from '@apollo/client';
+import { getImageUrlWithMaxSize } from '../../helpers/image';
 
 const Product = styled(Link)`
     display: flex;
@@ -63,7 +64,11 @@ const CompactListProduct = ({ product }) => {
     return (
         <Product key={product.id} to={'/p/' + product.alias}>
             <div className="imageWrapper">
-                <img src={product.primaryImage.url} />
+                <img
+                    src={getImageUrlWithMaxSize(product.primaryImage.url, {
+                        maxHeight: 200,
+                    })}
+                />
             </div>
             <div className="title">{product.title}</div>
             <div className="price">{formatPrice(product.price)}</div>
