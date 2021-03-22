@@ -17,6 +17,7 @@ import 'react-dates/lib/css/_datepicker.css';
 import ScrollToTop from './components/ScrollToTop.jsx';
 import { Col, Container, Row } from 'reactstrap';
 import ConfigContainer from './containers/ConfigContainer.jsx';
+import DlidContainer from './containers/DlidCatcher';
 
 const FallbackComponent = () => (
     <Container>
@@ -43,15 +44,17 @@ const App = ({
                     notFoundEvent,
                 }}
             >
-                <FacebookProvider appId={2011852605625604}>
-                    <ScrollToTop>
-                        <AuthProvider>
-                            <CartProvider>
-                                <Routes />
-                            </CartProvider>
-                        </AuthProvider>
-                    </ScrollToTop>
-                </FacebookProvider>
+                <DlidContainer>
+                    <FacebookProvider appId={2011852605625604}>
+                        <ScrollToTop>
+                            <AuthProvider>
+                                <CartProvider>
+                                    <Routes />
+                                </CartProvider>
+                            </AuthProvider>
+                        </ScrollToTop>
+                    </FacebookProvider>
+                </DlidContainer>
             </AppContext.Provider>
         </ConfigContainer>
     </Sentry.ErrorBoundary>
