@@ -12,7 +12,7 @@ const HomeQuery = gql`
     query HomeQuery {
         highlightedProducts: products(
             filters: { onlyAvailableForOrder: true }
-            pagination: { count: 8 }
+            pagination: { count: 6 }
             orderBy: "featuredAt"
         ) {
             edges {

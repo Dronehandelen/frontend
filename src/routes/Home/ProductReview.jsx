@@ -12,6 +12,7 @@ const Product = styled(Link)`
     text-decoration: none;
     color: inherit;
     padding: 5px;
+    margin-bottom: 10px;
 
     &:hover {
         text-decoration: none;
