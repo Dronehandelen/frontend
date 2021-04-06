@@ -6,6 +6,7 @@ import { gql } from '@apollo/client';
 import { productFragment } from '../../components/Product/Product.jsx';
 import DefaultHookQuery from '../../containers/DefaultHookQuery.jsx';
 import { useQuery } from '@apollo/client';
+import { productReviewFragment } from './ProductReview.jsx';
 
 const HomeQuery = gql`
     query HomeQuery {
@@ -42,8 +43,21 @@ const HomeQuery = gql`
                 }
             }
         }
+        lastReviews(count: 4) {
+            id
+            stars
+            review
+            product {
+                ...ProductReviewFragment
+            }
+            user {
+                firstName
+                lastName
+            }
+        }
     }
     ${productFragment}
+    ${productReviewFragment}
 `;
 
 const HomeContainer = (props) => {

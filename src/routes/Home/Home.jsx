@@ -7,6 +7,7 @@ import appConfig from '../../config/app.js';
 import PageSeparator from '../../components/PageSeparator.jsx';
 import { Link } from 'react-router-dom';
 import InstagramFeed from '../../components/InstagramFeed.jsx';
+import ProductReview from './ProductReview.jsx';
 
 const SeeMore = styled.div`
     font-size: 1rem;
@@ -27,16 +28,24 @@ const Home = ({ data }) => {
     return (
         <Container>
             <Row className="mt-4">
-                <Col>
+                <Col md={9}>
                     <PageSeparator>Utvalgte produkter</PageSeparator>
+                    <ProductsView
+                        listName="Home - Featured"
+                        products={data.highlightedProducts.edges.map(
+                            (edge) => edge.node
+                        )}
+                        lg={4}
+                        md={6}
+                    />
+                </Col>
+                <Col md={3}>
+                    <PageSeparator>Siste anmeldelser</PageSeparator>
+                    {data.lastReviews.map((review) => (
+                        <ProductReview key={review.id} review={review} />
+                    ))}
                 </Col>
             </Row>
-            <ProductsView
-                listName="Home - Featured"
-                products={data.highlightedProducts.edges.map(
-                    (edge) => edge.node
-                )}
-            />
             <Row className="mt-4">
                 <Col>
                     <PageSeparator className="d-flex justify-content-between">
