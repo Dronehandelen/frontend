@@ -43,6 +43,7 @@
         "react-facebook": "^8.1.4",
         "react-helmet": "^6.1.0",
         "react-i18next": "^11.8.9",
+        "react-instagram-authless-feed": "jamesmoriarty/react-instagram-authless-feed",
         "react-lazyload": "^3.2.0",
         "react-player": "^2.9.0",
         "react-popper": "^2.2.4",

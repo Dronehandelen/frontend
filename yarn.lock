@@ -9272,6 +9272,10 @@ react-i18next@^11.8.9:
     "@babel/runtime" "^7.13.6"
     html-parse-stringify2 "^2.0.1"
 
+react-instagram-authless-feed@jamesmoriarty/react-instagram-authless-feed:
+  version "2.0.1"
+  resolved "https://codeload.github.com/jamesmoriarty/react-instagram-authless-feed/tar.gz/6130ff4e6004ce61a5529c09ea63507a08748fc0"
+
 react-is@^16.13.1, react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.1, react-is@^16.8.4:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
