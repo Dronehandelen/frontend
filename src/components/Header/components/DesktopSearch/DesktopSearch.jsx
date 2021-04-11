@@ -36,10 +36,10 @@ const OtherSearchZone = styled.div`
 const SearchTitle = styled.div`
     font-weight: bold;
     font-size: 1.2em;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 `;
 
-const Brand = styled(Link)`
+const SimpleLink = styled(Link)`
     cursor: pointer;
     text-decoration: none;
     color: inherit;
@@ -139,14 +139,35 @@ const DesktopSearch = ({
                                     {!loading &&
                                         data &&
                                         data.brands.map((brand) => (
-                                            <Brand
+                                            <SimpleLink
                                                 key={brand.id}
                                                 to={'/b/' + brand.alias}
                                                 className="btn-link"
                                             >
                                                 {brand.name}
-                                            </Brand>
+                                            </SimpleLink>
                                         ))}
+                                    <SearchTitle className="mt-2">
+                                        Kategorier
+                                    </SearchTitle>
+                                    {loading && <Spinner size="sm" />}
+                                    {!loading &&
+                                        data &&
+                                        data.categories.length === 0 &&
+                                        'Ingen resultater'}
+                                    {!loading &&
+                                        data &&
+                                        data.categories
+                                            .filter((x, index) => index < 5)
+                                            .map((category) => (
+                                                <SimpleLink
+                                                    key={category.id}
+                                                    to={'/c/' + category.alias}
+                                                    className="btn-link"
+                                                >
+                                                    {category.name}
+                                                </SimpleLink>
+                                            ))}
                                 </div>
                             </OtherSearchZone>
                         </Wrapper>

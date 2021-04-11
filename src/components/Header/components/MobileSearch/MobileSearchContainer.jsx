@@ -12,6 +12,7 @@ const mobileSearchQuery = gql`
         $brandFilters: BrandFilters
         $pagination: PaginationInput!
         $orderBy: String!
+        $searchString: String!
     ) {
         brands(filters: $brandFilters) {
             id
@@ -28,6 +29,11 @@ const mobileSearchQuery = gql`
                     ...CompactListProductFragment
                 }
             }
+        }
+        categories(search: $searchString) {
+            id
+            name
+            alias
         }
     }
     ${compactListProductFragment}
@@ -47,6 +53,7 @@ const DataLoader = ({ debouncedInput, children }) => {
                 count: 6,
             },
             orderBy: 'searchRank',
+            searchString: debouncedInput,
         },
     });
 
@@ -86,6 +93,7 @@ const MobileSearchContainer = () => {
                 setInput={setInput}
                 products={null}
                 brands={null}
+                categories={null}
                 hasFocus={hasFocus}
                 setHasFocus={setHasFocus}
                 onEnter={() => {
@@ -106,6 +114,7 @@ const MobileSearchContainer = () => {
                     setInput={setInput}
                     products={data && data.products.edges.map((e) => e.node)}
                     brands={data && data.brands}
+                    categories={data && data.categories}
                     isInFullScreen={isInFullScreen}
                     hasFocus={hasFocus}
                     setHasFocus={setHasFocus}

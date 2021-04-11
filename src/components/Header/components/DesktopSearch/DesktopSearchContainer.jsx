@@ -10,11 +10,12 @@ import { compactListProductFragment } from '../../../Product/CompactListProduct.
 import DesktopSearch from './DesktopSearch';
 
 const GET_SEARCH = gql`
-    query GetBrands(
+    query GetSearch(
         $filters: ProductFilters
         $brandFilters: BrandFilters
         $pagination: PaginationInput!
         $orderBy: String!
+        $searchString: String!
     ) {
         brands(filters: $brandFilters) {
             id
@@ -31,6 +32,11 @@ const GET_SEARCH = gql`
                     ...CompactListProductFragment
                 }
             }
+        }
+        categories(search: $searchString) {
+            id
+            name
+            alias
         }
     }
     ${compactListProductFragment}
@@ -50,6 +56,7 @@ const DataLoader = ({ debouncedInput, children }) => {
                 count: 6,
             },
             orderBy: 'searchRank',
+            searchString: debouncedInput,
         },
     });
 

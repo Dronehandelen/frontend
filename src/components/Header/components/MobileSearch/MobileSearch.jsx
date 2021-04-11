@@ -9,14 +9,10 @@ import {
     Row,
     Spinner,
 } from 'reactstrap';
-import { useDebounce, useLockBodyScroll } from 'moment-hooks';
 import styled from 'styled-components';
 
-import SearchContainer from '../../../../containers/SearchContainer.jsx';
-import { ProductListItem } from '../../../Product/index.js';
 import MobileDropdownWrapper from '../MobileDropdownWrapper.jsx';
-import useSearchLogging from '../../../../hooks/useSearchLogging.js';
-import { Link, useHistory, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import CompactListProduct from '../../../Product/CompactListProduct.jsx';
 
 const Wrapper = styled(MobileDropdownWrapper)`
@@ -58,7 +54,15 @@ const Products = styled.div`
     }
 `;
 
-const Brand = styled(Link)`
+const SimpleLinks = styled.div`
+    display: flex;
+    flex-direction: row;
+    & > * {
+        flex: 1;
+    }
+`;
+
+const SimpleLink = styled(Link)`
     cursor: pointer;
     text-decoration: none;
     color: inherit;
@@ -77,6 +81,7 @@ const MobileSearchContainer = ({
     loading,
     brands,
     products,
+    categories,
     isInFullScreen,
     setHasFocus,
     onEnter,
@@ -143,23 +148,45 @@ const MobileSearchContainer = ({
                                     ))}
                             </Products>
                             {brands && brands.length !== 0 && (
-                                <div className="mt-3">
+                                <SimpleLinks className="mt-3">
                                     <div>
-                                        <strong>Merker</strong>
+                                        <div>
+                                            <strong>Merker</strong>
+                                        </div>
+                                        <div>
+                                            {brands &&
+                                                brands.map((brand) => (
+                                                    <SimpleLink
+                                                        key={brand.id}
+                                                        to={'/b/' + brand.alias}
+                                                        className="btn-link"
+                                                    >
+                                                        {brand.name}
+                                                    </SimpleLink>
+                                                ))}
+                                        </div>
                                     </div>
                                     <div>
-                                        {brands &&
-                                            brands.map((brand) => (
-                                                <Brand
-                                                    key={brand.id}
-                                                    to={'/b/' + brand.alias}
-                                                    className="btn-link"
-                                                >
-                                                    {brand.name}
-                                                </Brand>
-                                            ))}
+                                        <div>
+                                            <strong>Kategorier</strong>
+                                        </div>
+                                        <div>
+                                            {categories &&
+                                                categories.map((category) => (
+                                                    <SimpleLink
+                                                        key={category.id}
+                                                        to={
+                                                            '/c/' +
+                                                            category.alias
+                                                        }
+                                                        className="btn-link"
+                                                    >
+                                                        {category.name}
+                                                    </SimpleLink>
+                                                ))}
+                                        </div>
                                     </div>
-                                </div>
+                                </SimpleLinks>
                             )}
                         </>
                     )}
