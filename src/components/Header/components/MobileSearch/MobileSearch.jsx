@@ -14,6 +14,7 @@ import styled from 'styled-components';
 import MobileDropdownWrapper from '../MobileDropdownWrapper.jsx';
 import { Link } from 'react-router-dom';
 import CompactListProduct from '../../../Product/CompactListProduct.jsx';
+import { useLockBodyScroll } from 'moment-hooks';
 
 const Wrapper = styled(MobileDropdownWrapper)`
     z-index: 3;
@@ -147,7 +148,8 @@ const MobileSearchContainer = ({
                                         />
                                     ))}
                             </Products>
-                            {brands && brands.length !== 0 && (
+                            {((brands && brands.length !== 0) ||
+                                (categories && categories.length !== 0)) && (
                                 <SimpleLinks className="mt-3">
                                     <div>
                                         <div>
