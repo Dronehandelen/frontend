@@ -3,6 +3,7 @@ import { Input, Popover, Spinner } from 'reactstrap';
 import styled from 'styled-components';
 import { Link, useHistory } from 'react-router-dom';
 import CompactListProduct from '../../../Product/CompactListProduct';
+import tracking from '../../../../helpers/tracking.js';
 
 const StyledPopover = styled(Popover)`
     .popover {
@@ -164,6 +165,12 @@ const DesktopSearch = ({
                                                     key={category.id}
                                                     to={'/c/' + category.alias}
                                                     className="btn-link"
+                                                    onClick={() =>
+                                                        tracking.categoryEvent(
+                                                            category.id,
+                                                            'click'
+                                                        )
+                                                    }
                                                 >
                                                     {category.name}
                                                 </SimpleLink>

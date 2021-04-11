@@ -14,7 +14,7 @@ import styled from 'styled-components';
 import MobileDropdownWrapper from '../MobileDropdownWrapper.jsx';
 import { Link } from 'react-router-dom';
 import CompactListProduct from '../../../Product/CompactListProduct.jsx';
-import { useLockBodyScroll } from 'moment-hooks';
+import tracking from '../../../../helpers/tracking.js';
 
 const Wrapper = styled(MobileDropdownWrapper)`
     z-index: 3;
@@ -182,6 +182,12 @@ const MobileSearchContainer = ({
                                                             category.alias
                                                         }
                                                         className="btn-link"
+                                                        onClick={() =>
+                                                            tracking.categoryEvent(
+                                                                category.id,
+                                                                'click'
+                                                            )
+                                                        }
                                                     >
                                                         {category.name}
                                                     </SimpleLink>

@@ -50,7 +50,6 @@ const Row = ({
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => {
                 setIsHovered(false);
-                console.log('onMouseLeave');
             }}
         >
             <div>{children}</div>
