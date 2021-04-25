@@ -14,10 +14,21 @@ import useConfirmCheckoutMutation from '../../graphql/mutations/confirmCheckout.
 import tracking from '../../helpers/tracking.js';
 import { defaultAddressValues } from '../../components/Address';
 import Header from './components/Header.jsx';
+import { gql, useMutation } from '@apollo/client';
+import checkoutFragment from '../../graphql/fragments/checkout.js';
+
+const BLOCK_CHECKOUT_FOR_PAYMENT = gql`
+    mutation BlockCheckoutForPayment($priceInCent: Int!) {
+        blockCheckoutForPayment(priceInCent: $priceInCent) {
+            ${checkoutFragment}
+        }
+    }
+`;
 
 const CheckoutContainer = () => {
-    const { data, loading } = useGetCheckoutQuery();
+    const { data, loading, refetch } = useGetCheckoutQuery();
     const [_updateCheckout] = useUpdateCheckoutMutation();
+    const [blockCheckoutForPayment] = useMutation(BLOCK_CHECKOUT_FOR_PAYMENT);
     const [confirmCheckout] = useConfirmCheckoutMutation();
     const { isAuthenticated, isAuthenticating } = React.useContext(AuthContext);
     const [isUpdatingCheckout, setIsUpdatingCheckout] = React.useState(false);
@@ -305,7 +316,9 @@ const CheckoutContainer = () => {
                                             .clientSecret
                                     }
                                     confirmCheckout={confirmCheckout}
+                                    blockCheckoutForPayment={blockCheckoutForPayment}
                                     isUpdatingCheckout={isUpdatingCheckout}
+                                    refetch={refetch}
                                     deliveryType={
                                         state.deliveryType ||
                                         checkoutData.deliveryType

@@ -48,6 +48,8 @@ const Confirm = ({
     shippingPrice,
     paymentMethod,
     onSetPaymentMethod,
+    blockCheckoutForPayment,
+    refetch,
 }) => {
     const { loading, data, refetch: refetchCards } = useQuery(getCardsQuery, {
         errorPolicy: 'all',
@@ -81,9 +83,9 @@ const Confirm = ({
         });
 
         try {
-            await confirmCheckout({
+            const { data } = await blockCheckoutForPayment({
                 variables: {
-                    dryRun: true,
+                    priceInCent: price * 100,
                 },
             });
 
@@ -91,7 +93,9 @@ const Confirm = ({
                 await handleStripePayment(
                     t,
                     stripe,
-                    paymentIntentClientSecret,
+                    data.blockCheckoutForPayment.stripePaymentIntent &&
+                        data.blockCheckoutForPayment.stripePaymentIntent
+                            .clientSecret,
                     elements,
                     stripeVariables
                 );
@@ -126,10 +130,15 @@ const Confirm = ({
             let error = getGraphqlError(e, null);
 
             if (error) {
-                const isNoStock =
+                const firstMessage =
                     error.type === 'validation' &&
                     error.error.messages.length !== 0 &&
-                    error.error.messages[0].message === 'not_in_stock';
+                    error.error.messages[0];
+                const isNoStock =
+                    firstMessage && firstMessage.message === 'not_in_stock';
+                const mismatchPrice =
+                    firstMessage && firstMessage.key === 'price_in_cent';
+
                 if (isNoStock) {
                     error = (
                         <div>
@@ -148,6 +157,31 @@ const Confirm = ({
                                 }}
                             >
                                 Gå til handlevognen
+                            </Button>
+                        </div>
+                    );
+                } else if (mismatchPrice) {
+                    error = (
+                        <div>
+                            <p>
+                                Prisen du ser samsvarer ikke med det vi har hos
+                                oss. Dette kan være på grunn av at du har
+                                starter utsjekk i flere faner. Du kan gå videre
+                                ved å trykke på oppdater.
+                            </p>
+                            <Button
+                                color="danger"
+                                onClick={() => {
+                                    setStatus({
+                                        loading: true,
+                                        error: null,
+                                    });
+                                    refetch().then(() => {
+                                        setStatus({ loading: false });
+                                    });
+                                }}
+                            >
+                                Oppdater
                             </Button>
                         </div>
                     );
