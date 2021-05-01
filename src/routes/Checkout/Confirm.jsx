@@ -37,7 +37,6 @@ const getCardsQuery = gql`
 `;
 
 const Confirm = ({
-    paymentIntentClientSecret,
     stripe,
     price,
     elements,
@@ -83,13 +82,13 @@ const Confirm = ({
         });
 
         try {
-            const { data } = await blockCheckoutForPayment({
-                variables: {
-                    priceInCent: price * 100,
-                },
-            });
-
             if (paymentMethod === appConfig.paymentMethods.STRIPE) {
+                const { data } = await blockCheckoutForPayment({
+                    variables: {
+                        priceInCent: price * 100,
+                    },
+                });
+
                 await handleStripePayment(
                     t,
                     stripe,
@@ -138,6 +137,7 @@ const Confirm = ({
                     firstMessage && firstMessage.message === 'not_in_stock';
                 const mismatchPrice =
                     firstMessage && firstMessage.key === 'price_in_cent';
+                const serverError = error.messageKey === 'internal_error';
 
                 if (isNoStock) {
                     error = (
@@ -183,6 +183,14 @@ const Confirm = ({
                             >
                                 Oppdater
                             </Button>
+                        </div>
+                    );
+                } else if (serverError) {
+                    error = (
+                        <div>
+                            Vi fikk problemer når vi skulle fullføre din
+                            bestilling. Vennligst prøv igjen eller ta kontakt
+                            med oss om problemet vedvarer.
                         </div>
                     );
                 } else {

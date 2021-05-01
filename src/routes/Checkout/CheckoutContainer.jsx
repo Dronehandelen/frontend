@@ -310,13 +310,10 @@ const CheckoutContainer = () => {
                                             rememberCard,
                                         });
                                     }}
-                                    paymentIntentClientSecret={
-                                        checkoutData.stripePaymentIntent &&
-                                        checkoutData.stripePaymentIntent
-                                            .clientSecret
-                                    }
                                     confirmCheckout={confirmCheckout}
-                                    blockCheckoutForPayment={blockCheckoutForPayment}
+                                    blockCheckoutForPayment={
+                                        blockCheckoutForPayment
+                                    }
                                     isUpdatingCheckout={isUpdatingCheckout}
                                     refetch={refetch}
                                     deliveryType={
