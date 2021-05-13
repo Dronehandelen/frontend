@@ -2,7 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { Button, Col, Container, Row } from 'reactstrap';
-import store from 'store';
+import Cookies from 'js-cookie';
+import AppContext from '../contexts/app';
 
 const Wrapper = styled.div`
     position: fixed;
@@ -16,10 +17,10 @@ const Wrapper = styled.div`
 `;
 
 const CookieConsent = () => {
-    const ok = store.get('acceptedCookies');
+    const { acceptedCookies } = React.useContext(AppContext);
     const [isJustSet, setIsJustSet] = React.useState(false);
 
-    if (ok === 'yes' || isJustSet) {
+    if (acceptedCookies() === 'yes' || isJustSet) {
         return <></>;
     }
 
@@ -33,7 +34,7 @@ const CookieConsent = () => {
                         <Link to="privacy-policy">her</Link>.{' '}
                         <Button
                             onClick={() => {
-                                store.set('acceptedCookies', 'yes');
+                                Cookies.set('acceptedCookies', 'yes');
                                 setIsJustSet(true);
                             }}
                             size="sm"

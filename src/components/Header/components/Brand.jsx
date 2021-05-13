@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 
 const DesktopBrand = styled(NavbarBrand)`
     > img {
+        height: 51px;
         max-width: 250px;
     }
 `;
@@ -16,6 +17,7 @@ const MobileBrand = styled(Link)`
     padding: 10px;
 
     > img {
+        height: 41px;
         max-width: 200px;
     }
 `;

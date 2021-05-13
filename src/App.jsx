@@ -34,6 +34,7 @@ const App = ({
     getNow = () => moment(),
     cookies,
     notFoundEvent = () => {},
+    acceptedCookies = () => null,
 }) => (
     <Sentry.ErrorBoundary showDialog fallback={FallbackComponent}>
         <ConfigContainer>
@@ -42,6 +43,7 @@ const App = ({
                     getNow,
                     cookies,
                     notFoundEvent,
+                    acceptedCookies,
                 }}
             >
                 <DlidContainer>

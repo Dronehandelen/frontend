@@ -36,6 +36,7 @@ ReactDOM.hydrate(
                 cookies={{
                     isAdmin: Cookies.get('isAdmin'),
                 }}
+                acceptedCookies={() => Cookies.get('acceptedCookies')}
             />
         </BrowserRouter>
     </ApolloProvider>,

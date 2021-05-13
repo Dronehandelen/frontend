@@ -120,6 +120,7 @@ server
                             getNow={() => now.clone()}
                             cookies={req.cookies}
                             notFoundEvent={() => (status = 404)}
+                            acceptedCookies={() => req.cookies.acceptedCookies}
                         />
                     </StaticRouter>
                 </ApolloProvider>
