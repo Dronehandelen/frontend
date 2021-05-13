@@ -61,7 +61,7 @@ const Arrow = styled.div`
     }
 `;
 
-const Product = ({ product, addProduct, refetch, isAdmin }) => {
+const Product = ({ product, addProduct, refetch }) => {
     const [isFullscreenOpen, setIsFullscreenOpen] = React.useState(false);
     const url = getDefaultProductImageUrl(product);
     const augmentedProduct = ProductHelper(product);
@@ -94,7 +94,6 @@ const Product = ({ product, addProduct, refetch, isAdmin }) => {
 
     return (
         <Container>
-            {isAdmin && <AdminActions product={product} />}
             <Row>
                 <Col>
                     <Breadcrumb>

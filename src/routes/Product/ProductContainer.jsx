@@ -10,7 +10,6 @@ import { useLocation } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { packageProductsFragment } from './components/PackageProducts';
 import moment from 'moment';
-import AuthContext from '../../contexts/auth.js';
 import { productReviewsFragment } from './Reviews.jsx';
 import { productFragment } from '../../components/Product/Product.jsx';
 
@@ -84,7 +83,6 @@ export const getProductQuery = gql`
 
 const ProductContainer = ({ productId, productAlias }) => {
     const { addProduct } = React.useContext(CartContext);
-    const { user } = React.useContext(AuthContext);
     const location = useLocation();
 
     return (
@@ -173,7 +171,6 @@ const ProductContainer = ({ productId, productAlias }) => {
                             </script>
                         </Helmet>
                         <Product
-                            isAdmin={user && user.isAdmin}
                             product={data.product}
                             addProduct={(amount) =>
                                 addProduct(data.product, amount)
