@@ -1,12 +1,12 @@
 import React from 'react';
-import { useQuery, useApolloClient } from '@apollo/client';
 import { gql } from '@apollo/client';
 
 import useLogoutMutation from '../../graphql/mutations/logout.js';
+import startupContext from '../../contexts/startup.js';
 import AuthProvider from './AuthProvider';
 
-const AUTH_REQUEST = gql`
-    {
+export const authFragment = gql`
+    fragment AuthFragment on Query {
         auth {
             user {
                 id
@@ -44,10 +44,7 @@ const AUTH_REQUEST = gql`
 `;
 
 const AuthProviderContainer = (props) => {
-    const client = useApolloClient();
-    const { loading, data, refetch } = useQuery(AUTH_REQUEST, {
-        errorPolicy: 'all',
-    });
+    const { refetch, writeData, ...data } = React.useContext(startupContext);
     const [isLoggedOut, setIsLoggedOut] = React.useState(false);
     const [logout] = useLogoutMutation();
 
@@ -59,18 +56,15 @@ const AuthProviderContainer = (props) => {
 
     return (
         <AuthProvider
-            loading={loading}
+            loading={false}
             data={data}
             refetch={refetch}
             logout={() => {
                 setIsLoggedOut(true);
                 try {
                     logout().then(() => {
-                        client.writeQuery({
-                            query: AUTH_REQUEST,
-                            data: {
-                                auth: null,
-                            },
+                        writeData({
+                            auth: null,
                         });
 
                         setIsLoggedOut(false);

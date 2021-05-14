@@ -1,11 +1,9 @@
 import React from 'react';
 import { gql } from '@apollo/client';
-import { useQuery } from '@apollo/client';
-import { Spinner } from 'reactstrap';
 import configContext from '../contexts/config.js';
 
-const QUERY = gql`
-    {
+export const configFragment = gql`
+    fragment ConfigFragment on Query {
         config {
             reward {
                 vipPointsLast12Months
@@ -17,21 +15,9 @@ const QUERY = gql`
     }
 `;
 
-const ConfigContainer = ({ children }) => {
-    const { error, loading, data } = useQuery(QUERY, {
-        errorPolicy: 'all',
-    });
-
-    if (error) {
-        return <div>Noe skjedde</div>;
-    }
-
-    if (loading) {
-        return <Spinner />;
-    }
-
+const ConfigContainer = ({ config, children }) => {
     return (
-        <configContext.Provider value={data.config}>
+        <configContext.Provider value={config}>
             {children}
         </configContext.Provider>
     );

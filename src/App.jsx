@@ -16,8 +16,8 @@ import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
 import ScrollToTop from './components/ScrollToTop.jsx';
 import { Col, Container, Row } from 'reactstrap';
-import ConfigContainer from './containers/ConfigContainer.jsx';
 import DlidContainer from './containers/DlidCatcher';
+import StartupContainer from './containers/StartupContainer';
 
 const FallbackComponent = () => (
     <Container>
@@ -37,7 +37,7 @@ const App = ({
     acceptedCookies = () => null,
 }) => (
     <Sentry.ErrorBoundary showDialog fallback={FallbackComponent}>
-        <ConfigContainer>
+        <StartupContainer>
             <AppContext.Provider
                 value={{
                     getNow,
@@ -58,7 +58,7 @@ const App = ({
                     </FacebookProvider>
                 </DlidContainer>
             </AppContext.Provider>
-        </ConfigContainer>
+        </StartupContainer>
     </Sentry.ErrorBoundary>
 );
 

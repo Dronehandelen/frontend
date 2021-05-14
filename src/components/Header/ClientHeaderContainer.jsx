@@ -1,9 +1,10 @@
 import React from 'react';
-import { useQuery, gql } from '@apollo/client';
+import { gql } from '@apollo/client';
 import ClientHeader from './ClientHeader.jsx';
+import startupContext from '../../contexts/startup';
 
-const HeaderQuery = gql`
-    query HeaderQuery {
+export const headerFragment = gql`
+    fragment HeaderFragment on Query {
         brands {
             id
             name
@@ -44,8 +45,8 @@ const HeaderQuery = gql`
     }
 `;
 
-const ClientHeaderContainer = ({ children }) => {
-    const { data } = useQuery(HeaderQuery);
+const ClientHeaderContainer = () => {
+    const data = React.useContext(startupContext);
 
     return <ClientHeader data={data} />;
 };
