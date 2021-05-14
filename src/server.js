@@ -8,6 +8,7 @@ import express from 'express';
 import path from 'path';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { renderToStringWithData } from '@apollo/client/react/ssr';
+import { ChunkExtractor, ChunkExtractorManager } from '@loadable/server';
 import { ServerStyleSheet } from 'styled-components';
 import serverConfig from './config/server.js';
 import appConfig from './config/app.js';
@@ -112,17 +113,27 @@ server
             const now = moment();
             let status = 200;
 
+            const extractor = new ChunkExtractor({
+                statsFile: path.resolve('build/loadable-stats.json'),
+                // razzle client bundle entrypoint is client.js
+                entrypoints: ['client'],
+            });
+
             const SetupApp = sheet.collectStyles(
-                <ApolloProvider client={req.apolloClient}>
-                    <StaticRouter context={context} location={req.url}>
-                        <App
-                            getNow={() => now.clone()}
-                            cookies={req.cookies}
-                            notFoundEvent={() => (status = 404)}
-                            acceptedCookies={() => req.cookies.acceptedCookies}
-                        />
-                    </StaticRouter>
-                </ApolloProvider>
+                <ChunkExtractorManager extractor={extractor}>
+                    <ApolloProvider client={req.apolloClient}>
+                        <StaticRouter context={context} location={req.url}>
+                            <App
+                                getNow={() => now.clone()}
+                                cookies={req.cookies}
+                                notFoundEvent={() => (status = 404)}
+                                acceptedCookies={() =>
+                                    req.cookies.acceptedCookies
+                                }
+                            />
+                        </StaticRouter>
+                    </ApolloProvider>
+                </ChunkExtractorManager>
             );
 
             if (context.url) {
@@ -132,6 +143,10 @@ server
                     .then((content) => {
                         const helmet = Helmet.renderStatic();
                         const initialState = req.apolloClient.extract();
+
+                        const scriptTags = extractor.getScriptTags();
+                        const linkTags = extractor.getLinkTags();
+                        const styleTags = extractor.getStyleTags();
 
                         if (context.url) {
                             return res.redirect(context.url);
@@ -146,6 +161,9 @@ server
                             helmet,
                             envVariables,
                             status,
+                            scriptTags,
+                            linkTags,
+                            styleTags,
                         });
                     })
                     .catch((err) => {
@@ -190,6 +208,9 @@ const render = ({
     helmet,
     envVariables = {},
     status = 200,
+    scriptTags,
+    linkTags,
+    styleTags,
 }) => {
     Object.values(res.cookiesToSet).forEach((cookieToSet) =>
         res.cookie(cookieToSet.name, cookieToSet.value, {
@@ -227,17 +248,9 @@ const render = ({
         </script>
         <!-- End Google Tag Manager -->
         <script async src="https://js.stripe.com/v3/"></script>
-        ${
-            assets.client.css
-                ? `<link rel="stylesheet" href="${assets.client.css}">`
-                : ''
-        }
-        ${
-            process.env.NODE_ENV === 'production'
-                ? `<script src="${assets.client.js}" defer crossorigin></script>`
-                : `<script src="${assets.client.js}" defer crossorigin></script>`
-        }
         ${sheet ? sheet.getStyleTags() : ''}
+        ${linkTags}
+        ${styleTags}
     </head>
     <body>
         <div id="root">${content}</div>
@@ -248,6 +261,7 @@ const render = ({
                 )};
                 window.envVariables=${JSON.stringify(envVariables)};
         </script>
+        ${scriptTags}
     </body>
 </html>`
     );

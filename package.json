@@ -4,6 +4,10 @@
     "private": true,
     "dependencies": {
         "@apollo/client": "^3.3.18",
+        "@loadable/babel-plugin": "^5.13.2",
+        "@loadable/component": "^5.15.0",
+        "@loadable/server": "^5.15.0",
+        "@loadable/webpack-plugin": "^5.15.0",
         "@popperjs/core": "^2.9.2",
         "@rooks/use-visibility-sensor": "^4.9.2",
         "@sentry/node": "^5.29.0",

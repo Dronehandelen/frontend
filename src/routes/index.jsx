@@ -1,42 +1,44 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Route, Switch, useLocation } from 'react-router-dom';
+import loadable from '@loadable/component';
 import Header from '../components/Header';
 import Helmet from '../components/Helmet';
-import Login from './Login';
-import Register from './Register';
-import ConfirmEmail from './ConfirmEmail';
-import Home from './Home';
-import Cart from './Cart';
-import Checkout from './Checkout';
-import CheckoutDone from './CheckoutDone.jsx';
-import Product from './Product';
-import MyAccount from './MyAccount';
 import ProductCategory from './ProductCategory';
 import Footer from '../components/Footer';
 import PrivacyPolicy from './CustomerSupport/routes/PrivacyPolicy.jsx';
 import CookieConsent from '../components/CookieConsent.jsx';
-import AboutUs from './AboutUs.jsx';
 import NotFound from '../components/NotFound.jsx';
 import RefundPolicy from './CustomerSupport/routes/RefundPolicy.jsx';
-import Search from './Search';
-import Offers from './Offers.jsx';
 import windowHelper from '../helpers/window';
 import Wishes from './Wishes.jsx';
 import RequestPasswordRequest from './RequestPasswordRequest.jsx';
 import ResetPassword from './ResetPassword.jsx';
-import OrderTerms from './CustomerSupport/routes/Terms.jsx';
-import Brand from './Brand';
-import Community from './Community';
-import NewProducts from './NewProducts.jsx';
 import Shipping from './CustomerSupport/routes/Shipping.jsx';
 import VippsCallback from './Checkout/routes/VippsCallback.jsx';
 import RewardPolicy from './CustomerSupport/routes/RewardPolicy.jsx';
-import CustomerSupport from './CustomerSupport';
 
 const Content = styled.div`
     min-height: 90vh;
 `;
+
+const AboutUs = loadable(() => import('./AboutUs'));
+const Brand = loadable(() => import('./Brand'));
+const Cart = loadable(() => import('./Cart'));
+const Checkout = loadable(() => import('./Checkout'));
+const CheckoutDone = loadable(() => import('./CheckoutDone'));
+const Community = loadable(() => import('./Community'));
+const ConfirmEmail = loadable(() => import('./ConfirmEmail'));
+const CustomerSupport = loadable(() => import('./CustomerSupport'));
+const Home = loadable(() => import('./Home'));
+const Login = loadable(() => import('./Login'));
+const MyAccount = loadable(() => import('./MyAccount'));
+const NewProducts = loadable(() => import('./NewProducts'));
+const Offers = loadable(() => import('./Offers'));
+const OrderTerms = loadable(() => import('./CustomerSupport/routes/Terms.jsx'));
+const Product = loadable(() => import('./Product'));
+const Register = loadable(() => import('./Register'));
+const Search = loadable(() => import('./Search'));
 
 const Routes = () => {
     const location = useLocation();
