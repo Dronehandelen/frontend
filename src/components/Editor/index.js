@@ -1,6 +1,8 @@
 import React from 'react';
-import Editor from './Editor.jsx';
-import DisplayEditor from './DisplayEditor.jsx';
+import loadable from '@loadable/component';
+
+const Editor = loadable(() => import('./Editor'));
+const DisplayEditor = loadable(() => import('./DisplayEditor'));
 
 const EditorContainer = (props) => {
     if (typeof props.onChange === 'function') {
