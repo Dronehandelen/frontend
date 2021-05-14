@@ -7,7 +7,7 @@ import { Helmet } from 'react-helmet';
 import express from 'express';
 import path from 'path';
 import { InMemoryCache } from 'apollo-cache-inmemory';
-import { getDataFromTree } from '@apollo/client/react/ssr';
+import { renderToStringWithData } from '@apollo/client/react/ssr';
 import { ServerStyleSheet } from 'styled-components';
 import serverConfig from './config/server.js';
 import appConfig from './config/app.js';
@@ -128,7 +128,7 @@ server
             if (context.url) {
                 res.redirect(context.url);
             } else {
-                getDataFromTree(SetupApp)
+                renderToStringWithData(SetupApp)
                     .then((content) => {
                         const helmet = Helmet.renderStatic();
                         const initialState = req.apolloClient.extract();
@@ -234,7 +234,7 @@ const render = ({
         }
         ${
             process.env.NODE_ENV === 'production'
-                ? `<script src="${assets.client.js}" defer></script>`
+                ? `<script src="${assets.client.js}" defer crossorigin></script>`
                 : `<script src="${assets.client.js}" defer crossorigin></script>`
         }
         ${sheet ? sheet.getStyleTags() : ''}

@@ -1,7 +1,5 @@
-const scss = require('./build-config/razzleScss');
-
 module.exports = {
-    plugins: [scss],
+    plugins: ['scss'],
     modifyWebpackConfig(opts) {
         const config = opts.webpackConfig;
 
