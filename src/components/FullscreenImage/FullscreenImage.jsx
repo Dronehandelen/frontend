@@ -57,8 +57,13 @@ const Button = styled.div`
     cursor: pointer;
 
     & > div {
-        background-color: rgba(0, 0, 0, ${props => (props.disabled ? 0 : 0.5)});
-        color: ${props => (props.disabled ? '#737373' : 'white')};
+        background-color: rgba(
+            0,
+            0,
+            0,
+            ${(props) => (props.disabled ? 0 : 0.5)}
+        );
+        color: ${(props) => (props.disabled ? '#737373' : 'white')};
         padding: 10px;
     }
 `;
@@ -105,7 +110,7 @@ const FullscreenImage = ({ selectedImage, onNext, onPrevious, onClose }) => {
             <Content>
                 <Button
                     className="d-md-flex d-none"
-                    onClick={e => {
+                    onClick={(e) => {
                         e.stopPropagation();
                         onPrevious && onPrevious();
                     }}
@@ -121,7 +126,7 @@ const FullscreenImage = ({ selectedImage, onNext, onPrevious, onClose }) => {
                             draggable={false}
                             src={selectedImage}
                             alt=""
-                            onClick={e => {
+                            onClick={(e) => {
                                 e.stopPropagation();
                             }}
                         />
@@ -129,7 +134,7 @@ const FullscreenImage = ({ selectedImage, onNext, onPrevious, onClose }) => {
                 </ImageWrapper>
                 <Button
                     className="d-md-flex d-none"
-                    onClick={e => {
+                    onClick={(e) => {
                         e.stopPropagation();
                         onNext && onNext();
                     }}
@@ -144,7 +149,7 @@ const FullscreenImage = ({ selectedImage, onNext, onPrevious, onClose }) => {
     );
 };
 
-export default props => {
+export default (props) => {
     if (!props.selectedImage) {
         return <></>;
     }

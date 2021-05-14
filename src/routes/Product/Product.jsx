@@ -31,8 +31,8 @@ import NewBobble from '../../components/NewBobble/NewBobble.jsx';
 import CustomCard from '../../components/Card.jsx';
 import CustomCardTitle from './components/CardTitle.jsx';
 import PackageProducts from './components/PackageProducts';
-import AdminActions from './components/AdminActions.jsx';
 import ProductStockStatus from '../../components/ProductStockStatus.jsx';
+import { getImageUrlWithMaxSize } from '../../helpers/image';
 
 const ImageWrapper = styled.div`
     height: ${(props) => props.height}vh;
@@ -171,7 +171,9 @@ const Product = ({ product, addProduct, refetch }) => {
                                 </div>
                             </Arrow>
                             <ImageWrapper
-                                src={selectedImageUrl}
+                                src={getImageUrlWithMaxSize(selectedImageUrl, {
+                                    maxHeight: 600,
+                                })}
                                 height={isLarge ? 40 : 30}
                                 onClick={() => {
                                     if (!isMobile) {
@@ -206,7 +208,12 @@ const Product = ({ product, addProduct, refetch }) => {
                                     }}
                                     className="mb-2"
                                 >
-                                    <ImageWrapper src={image.url} height={8} />
+                                    <ImageWrapper
+                                        src={getImageUrlWithMaxSize(image.url, {
+                                            maxHeight: 120,
+                                        })}
+                                        height={8}
+                                    />
                                 </Col>
                             ))}
                         </Row>
