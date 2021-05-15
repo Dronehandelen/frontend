@@ -60,7 +60,7 @@ const CategoryBrowser = ({ categories }) => {
                 })}
             >
                 <span>
-                    <i className="fa fa-bars mr-2" />
+                    <i className="fa fa-bars mr-2" style={{ width: 15 }} />
                     Alle produkter
                 </span>
             </SubHeaderLink>

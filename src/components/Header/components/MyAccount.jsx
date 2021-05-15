@@ -55,7 +55,10 @@ const MyAccountDesktop = ({ onLinkClick = () => () => {} }) => {
             <DropdownToggle nav>
                 {isAuthenticated && (
                     <>
-                        <span className="fa fa-user-circle" />{' '}
+                        <span
+                            className="fa fa-user-circle"
+                            style={{ width: 16 }}
+                        />{' '}
                         <span className="mr-2">{user.firstName}</span>
                     </>
                 )}

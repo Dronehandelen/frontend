@@ -25,7 +25,10 @@ const Cart = () => {
                         tracking.event('Header module', 'Cart icon clicked')
                     }
                 >
-                    <span className="fa fa-shopping-cart" />
+                    <span
+                        className="fa fa-shopping-cart"
+                        style={{ width: 15 }}
+                    />
                     <span className="d-lg-none ml-1">Handlevogn</span>
                     <CountWrapper>
                         {cartItemAmount !== 0 && (
