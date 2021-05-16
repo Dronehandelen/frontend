@@ -1,8 +1,8 @@
 import React from 'react';
 import 'isomorphic-fetch';
-import { FacebookProvider } from 'react-facebook';
 import moment from 'moment';
 import * as Sentry from '@sentry/react';
+import { Intercom, LiveChatLoaderProvider } from 'react-live-chat-loader';
 
 import Routes from './routes';
 import AuthProvider from './containers/AuthProvider';
@@ -47,15 +47,19 @@ const App = ({
                 }}
             >
                 <DlidContainer>
-                    <FacebookProvider appId={2011852605625604}>
-                        <ScrollToTop>
-                            <AuthProvider>
-                                <CartProvider>
+                    <ScrollToTop>
+                        <AuthProvider>
+                            <CartProvider>
+                                <LiveChatLoaderProvider
+                                    providerKey="sliqb0sr"
+                                    provider="intercom"
+                                >
                                     <Routes />
-                                </CartProvider>
-                            </AuthProvider>
-                        </ScrollToTop>
-                    </FacebookProvider>
+                                    <Intercom color="#0377BD" />
+                                </LiveChatLoaderProvider>
+                            </CartProvider>
+                        </AuthProvider>
+                    </ScrollToTop>
                 </DlidContainer>
             </AppContext.Provider>
         </StartupContainer>

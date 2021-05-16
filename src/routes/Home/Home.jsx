@@ -5,7 +5,6 @@ import { ProductsView } from '../../components/Products';
 import appConfig from '../../config/app.js';
 import PageSeparator from '../../components/PageSeparator.jsx';
 import { Link } from 'react-router-dom';
-import InstagramFeed from '../../components/InstagramFeed.jsx';
 import ProductReview from './ProductReview.jsx';
 
 const SeeMore = styled.div`
@@ -86,23 +85,6 @@ const Home = ({ data }) => {
                         siste og beste til deg som skal bygge drone eller ønsker
                         å fly FPV.
                     </p>
-                </Col>
-            </Row>
-            <Row className="mt-4">
-                <Col lg={8}>
-                    <InstagramFeed />
-                </Col>
-                <Col lg={4} className="d-flex justify-content-center mt-3">
-                    <iframe
-                        src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fdronehandelen%2F&tabs=timeline&width=340&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId=2011852605625604"
-                        width="340"
-                        height="500"
-                        style={{ border: 'none', overflow: 'hidden' }}
-                        scrolling="no"
-                        frameBorder="0"
-                        allowFullScreen={true}
-                        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                    />
                 </Col>
             </Row>
         </Container>

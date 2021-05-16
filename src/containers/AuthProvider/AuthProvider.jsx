@@ -30,26 +30,6 @@ const AuthProvider = ({
                 });
             });
             tracking.authenticated(user);
-
-            if (!appConfig.isServerSide && window.Tawk_API) {
-                const setAttributes = () => {
-                    window.Tawk_API.setAttributes(
-                        {
-                            name: `${user.firstName} ${user.lastName}`,
-                            email: user.email,
-                            hash: user.tawkToHash,
-                        },
-                        () => {}
-                    );
-                };
-                if (window.Tawk_API.setAttributes) {
-                    setAttributes();
-                } else {
-                    window.Tawk_API.onLoad = function () {
-                        setAttributes();
-                    };
-                }
-            }
         }
     }, [user]);
 
@@ -62,16 +42,19 @@ const AuthProvider = ({
         const interval = setInterval(() => {
             count = count + 1;
 
+            const intercomData = {
+                user_id: user.id,
+                name: `${user.firstName} ${user.lastName}`,
+                phone: user.phone,
+                email: user.email,
+                user_hash: user.intercomHash,
+            };
             if (window.Intercom) {
-                window.Intercom('update', {
-                    user_id: user.id,
-                    name: `${user.firstName} ${user.lastName}`,
-                    phone: user.phone,
-                    email: user.email,
-                    user_hash: user.intercomHash,
-                });
+                window.Intercom('update', intercomData);
 
                 clearInterval(interval);
+            } else {
+                window.intercomSettings = intercomData;
             }
             if (count > 20) {
                 clearInterval(interval);

@@ -4,7 +4,6 @@ import moment from 'moment';
 import { Link } from 'react-router-dom';
 import tracking from '../helpers/tracking';
 import EmailInputRegister from './EmailInputRegister.jsx';
-import { Like } from 'react-facebook';
 import AuthContext from '../contexts/auth.js';
 import appConfig from '../config/app.js';
 
@@ -35,13 +34,13 @@ const Footer = () => {
                 </Row>
                 <Row className="mt-4">
                     <Col className="d-flex justify-content-center">
-                        <Like
-                            href="https://www.facebook.com/dronehandelen"
-                            size="large"
-                            width="300"
-                            colorScheme="dark"
-                            layout="button_count"
-                        />
+                        {/*<Like*/}
+                        {/*    href="https://www.facebook.com/dronehandelen"*/}
+                        {/*    size="large"*/}
+                        {/*    width="300"*/}
+                        {/*    colorScheme="dark"*/}
+                        {/*    layout="button_count"*/}
+                        {/*/>*/}
                     </Col>
                 </Row>
                 {!isAuthenticated && (
