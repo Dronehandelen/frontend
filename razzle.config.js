@@ -5,7 +5,7 @@ const webpack = require('webpack');
 //     .BundleAnalyzerPlugin;
 
 module.exports = {
-    plugins: ['scss'],
+    plugins: ['scss', 'eslint'],
     modifyWebpackConfig(opts) {
         const config = opts.webpackConfig;
 

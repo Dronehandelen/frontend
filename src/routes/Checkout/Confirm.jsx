@@ -1,6 +1,6 @@
 import React from 'react';
 import { StripeProvider, Elements, injectStripe } from 'react-stripe-elements';
-import { Alert, Button, Card, Col, Form, Spinner } from 'reactstrap';
+import { Alert, Button, Card, Form, Spinner } from 'reactstrap';
 import { Link, useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import * as Sentry from '@sentry/react';

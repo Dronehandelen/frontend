@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Col, Container, Row } from 'reactstrap';
-import { Like } from 'react-facebook';
 import { ProductsView } from '../../components/Products';
 import appConfig from '../../config/app.js';
 import PageSeparator from '../../components/PageSeparator.jsx';

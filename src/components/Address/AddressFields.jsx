@@ -77,10 +77,7 @@ const AddressFields = ({ error, state, setState, keyPrefix = '' }) => {
                                         }
                                     }}
                                     invalid={!!errors || !!postalCodeError}
-                                    onBlur={() => {
-                                        if (state.postalCode.length === 4) {
-                                        }
-                                    }}
+                                    onBlur={() => {}}
                                 />
                                 {!!postalCodeError && (
                                     <FormFeedback>

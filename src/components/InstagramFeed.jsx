@@ -34,7 +34,7 @@ const Header = styled.a`
     }
 `;
 
-const InstagramFeed = ({}) => {
+const InstagramFeed = () => {
     const isMobile = useIsDevice('<=', 'md');
 
     return (

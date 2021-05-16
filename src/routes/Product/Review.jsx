@@ -3,7 +3,6 @@ import Stars from '../../components/Stars.jsx';
 import styled from 'styled-components';
 import { gql } from '@apollo/client';
 import auth from '../../contexts/auth.js';
-import { Button } from 'reactstrap';
 
 const Review = styled.div`
     margin-bottom: 10px;
