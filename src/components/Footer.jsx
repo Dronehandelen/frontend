@@ -6,6 +6,7 @@ import tracking from '../helpers/tracking';
 import EmailInputRegister from './EmailInputRegister.jsx';
 import AuthContext from '../contexts/auth.js';
 import appConfig from '../config/app.js';
+import FbLike from './FBLike';
 
 const Footer = () => {
     const { isAuthenticated } = React.useContext(AuthContext);
@@ -34,13 +35,7 @@ const Footer = () => {
                 </Row>
                 <Row className="mt-4">
                     <Col className="d-flex justify-content-center">
-                        {/*<Like*/}
-                        {/*    href="https://www.facebook.com/dronehandelen"*/}
-                        {/*    size="large"*/}
-                        {/*    width="300"*/}
-                        {/*    colorScheme="dark"*/}
-                        {/*    layout="button_count"*/}
-                        {/*/>*/}
+                        <FbLike />
                     </Col>
                 </Row>
                 {!isAuthenticated && (
