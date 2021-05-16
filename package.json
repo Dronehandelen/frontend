@@ -2,6 +2,9 @@
     "name": "frontend",
     "version": "0.1.0",
     "private": true,
+    "sideEffects": [
+        "*.scss"
+    ],
     "dependencies": {
         "@apollo/client": "^3.3.18",
         "@loadable/babel-plugin": "^5.13.2",
@@ -82,6 +85,8 @@
         "not op_mini all"
     ],
     "devDependencies": {
-        "i18next-scanner": "^3.0.0"
+        "babel-plugin-lodash": "^3.3.4",
+        "i18next-scanner": "^3.0.0",
+        "webpack-bundle-analyzer": "^4.4.1"
     }
 }

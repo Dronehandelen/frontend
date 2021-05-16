@@ -1,10 +1,20 @@
 const LoadableWebpackPlugin = require('@loadable/webpack-plugin');
 const path = require('path');
+const webpack = require('webpack');
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
+//     .BundleAnalyzerPlugin;
 
 module.exports = {
     plugins: ['scss'],
     modifyWebpackConfig(opts) {
         const config = opts.webpackConfig;
+
+        config.plugins.unshift(
+            new webpack.IgnorePlugin({
+                resourceRegExp: /^\.\/locale$/,
+                contextRegExp: /moment$/,
+            })
+        );
 
         if (opts.env.target === 'web' && opts.env.dev) {
             config.devServer.quiet = false;
@@ -29,6 +39,7 @@ module.exports = {
                     writeToDisk: { filename },
                 })
             );
+            // config.plugins.push(new BundleAnalyzerPlugin());
         }
 
         return config;
