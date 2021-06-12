@@ -34,7 +34,9 @@ const CookieConsent = () => {
                         <Link to="privacy-policy">her</Link>.{' '}
                         <Button
                             onClick={() => {
-                                Cookies.set('acceptedCookies', 'yes');
+                                Cookies.set('acceptedCookies', 'yes', {
+                                    expires: 365,
+                                });
                                 setIsJustSet(true);
                             }}
                             size="sm"
