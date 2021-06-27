@@ -83,8 +83,8 @@ const CheckoutContainer = () => {
     const checkoutData = data && data.getCheckout;
     const dataPostalOfficeId =
         checkoutData &&
-        checkoutData.postalOffice &&
-        checkoutData.postalOffice.id;
+        checkoutData.postalOffice2 &&
+        checkoutData.postalOffice2.id;
 
     const updateDeliveryMethod = React.useCallback(
         (deliveryType, postalOffice) => {
@@ -280,8 +280,8 @@ const CheckoutContainer = () => {
                                     }
                                     selectedPostalOfficeId={
                                         state.selectedPostalOfficeId ||
-                                        (checkoutData.postalOffice &&
-                                            checkoutData.postalOffice.id)
+                                        (checkoutData.postalOffice2 &&
+                                            checkoutData.postalOffice2.id)
                                     }
                                     deliveryType={
                                         state.deliveryType ||

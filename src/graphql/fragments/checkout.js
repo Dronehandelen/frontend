@@ -22,7 +22,7 @@ export default `
     stripePaymentIntent {
       clientSecret
     }
-    postalOffice {
+    postalOffice2 {
       id
       name
     }
