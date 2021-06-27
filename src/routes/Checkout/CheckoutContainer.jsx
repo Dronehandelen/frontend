@@ -220,8 +220,8 @@ const CheckoutContainer = () => {
                                             lastName:
                                                 checkoutData.deliveryInfo
                                                     .lastName,
-                                            phone:
-                                                checkoutData.deliveryInfo.phone,
+                                            phone: checkoutData.deliveryInfo
+                                                .phone,
                                             address:
                                                 checkoutData.deliveryInfo
                                                     .address.address,
@@ -231,9 +231,8 @@ const CheckoutContainer = () => {
                                             postalPlace:
                                                 checkoutData.deliveryInfo
                                                     .address.postalPlace,
-                                            co:
-                                                checkoutData.deliveryInfo
-                                                    .address.co,
+                                            co: checkoutData.deliveryInfo
+                                                .address.co,
                                         });
                                     }}
                                     onChangeEmail={() => {

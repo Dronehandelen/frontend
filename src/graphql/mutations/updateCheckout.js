@@ -5,7 +5,7 @@ import { GET_CHECKOUT } from '../queries/getCheckout.js';
 
 const UPDATE_CHECKOUT = gql`
     mutation UpdateCheckout(
-        $postalOfficeId: Int
+        $postalOfficeId: String
         $deliveryInfo: CheckoutDeliveryInfoInput
         $email: String
         $deliveryType: String
@@ -14,7 +14,7 @@ const UPDATE_CHECKOUT = gql`
         $keepAlive: Boolean
     ) {
         updateCheckout(
-            postalOfficeId: $postalOfficeId
+            newPostalOfficeId: $postalOfficeId
             deliveryInfo: $deliveryInfo
             email: $email
             deliveryType: $deliveryType

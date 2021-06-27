@@ -3,6 +3,7 @@ import formatPrice from '../../../../helpers/formatPrice.js';
 import appConfig from '../../../../config/app.js';
 import AlternativeWrapper from '../AlternativeWrapper.jsx';
 import BringSP from './BringSP.jsx';
+import PostNordMyPack from './PostNordMyPack';
 
 const DeliveryAlternatives = ({
     postalCode,
@@ -32,6 +33,63 @@ const DeliveryAlternatives = ({
 
     return (
         <>
+            {hasAlternative(appConfig.deliveryTypes.POSTNORD_MYPACK) && (
+                <PostNordMyPack
+                    postalCode={postalCode}
+                    selectedPostalOfficeId={selectedPostalOfficeId}
+                    onUpdateDeliveryMethod={(postalOffice) =>
+                        onUpdateDeliveryMethod(
+                            appConfig.deliveryTypes.POSTNORD_MYPACK,
+                            postalOffice
+                        )
+                    }
+                    selected={
+                        appConfig.deliveryTypes.POSTNORD_MYPACK === deliveryType
+                    }
+                    isUpdatingCheckout={isUpdatingCheckout}
+                    price={alternativePrice(
+                        appConfig.deliveryTypes.POSTNORD_MYPACK
+                    )}
+                />
+            )}
+            {hasAlternative(
+                appConfig.deliveryTypes.POSTNORD_MYPACK_HOME_SMALL
+            ) && (
+                <AlternativeWrapper
+                    title={
+                        <span>
+                            Pakke i postkassen (
+                            {formatPrice(
+                                alternativePrice(
+                                    appConfig.deliveryTypes
+                                        .POSTNORD_MYPACK_HOME_SMALL
+                                )
+                            )}
+                            ){' '}
+                            <img
+                                src="/postnord.svg"
+                                width="100"
+                                alt=""
+                                className="ml-2"
+                            />
+                        </span>
+                    }
+                    onSelect={() =>
+                        onUpdateDeliveryMethod(
+                            appConfig.deliveryTypes.POSTNORD_MYPACK_HOME_SMALL,
+                            null
+                        )
+                    }
+                    selected={
+                        appConfig.deliveryTypes.POSTNORD_MYPACK_HOME_SMALL ===
+                        deliveryType
+                    }
+                >
+                    <p>
+                        <i>Leveres til postkassen din.</i>
+                    </p>
+                </AlternativeWrapper>
+            )}
             {hasAlternative(appConfig.deliveryTypes.BRING_SP) && (
                 <BringSP
                     postalCode={postalCode}

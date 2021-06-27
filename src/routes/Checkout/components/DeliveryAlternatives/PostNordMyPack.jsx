@@ -1,24 +1,36 @@
 import React from 'react';
+import { gql, useQuery } from '@apollo/client';
 import AlternativeWrapper from '../AlternativeWrapper.jsx';
-import useGetPostalOfficesQuery from '../../../../graphql/queries/getPostalOffices.js';
 import DropDown from '../../../../components/Dropdown/DropDown.jsx';
 import DropDownToggle from '../../../../components/Dropdown/DropDownToggle.jsx';
 import DropDownMenu from '../../../../components/Dropdown/DropDownMenu.jsx';
 import DropDownItem from '../../../../components/Dropdown/DropDownItem.jsx';
 import formatPrice from '../../../../helpers/formatPrice.js';
-import appConfig from '../../../../config/app.js';
+import appConfig from '../../../../config/app';
 
-const BringAny = ({
+const GET_POST_OFFICE_QUERY = gql`
+    query GetPostalOffices($carrier: String!, $postalCode: String!) {
+        postalOffices2(carrier: $carrier, postalCode: $postalCode) {
+            id
+            name
+        }
+    }
+`;
+
+const PostNordMyPack = ({
     postalCode,
     selectedPostalOfficeId,
     onUpdateDeliveryMethod,
     selected,
     price,
 }) => {
-    const { loading, error, data } = useGetPostalOfficesQuery(
-        postalCode,
-        appConfig.carriers.BRING
-    );
+    const { loading, error, data } = useQuery(GET_POST_OFFICE_QUERY, {
+        variables: {
+            postalCode,
+            carrier: appConfig.carriers.POSTNORD,
+        },
+    });
+
     const [inSelectionProcess, setInSelectionProcess] = React.useState(false);
 
     React.useEffect(() => {
@@ -61,7 +73,12 @@ const BringAny = ({
             title={
                 <span>
                     Til butikken i nærheten ({formatPrice(price)}){' '}
-                    <img src="/posten.svg" alt="" className="ml-2" />
+                    <img
+                        src="/postnord.svg"
+                        width="100"
+                        alt=""
+                        className="ml-2"
+                    />
                 </span>
             }
             selected={selected}
@@ -96,4 +113,4 @@ const BringAny = ({
     );
 };
 
-export default BringAny;
+export default PostNordMyPack;

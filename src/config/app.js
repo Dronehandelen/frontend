@@ -34,6 +34,12 @@ export default {
         BRING: 'bring',
         BRING_PIP: '3584',
         BRING_SP: '5800',
+        POSTNORD_MYPACK: 'postnord_mypack',
+        POSTNORD_MYPACK_HOME_SMALL: 'postnord_mypack_home_small',
+    },
+    carriers: {
+        BRING: 'bring',
+        POSTNORD: 'postnord',
     },
     productTypes: {
         PRODUCT: 'product',

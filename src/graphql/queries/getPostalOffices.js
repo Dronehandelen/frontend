@@ -2,17 +2,18 @@ import { useQuery } from '@apollo/client';
 import { gql } from '@apollo/client';
 
 const GET_POSTAL_OFFICES = gql`
-    query GetPostalOffices($postalCode: String!) {
-        postalOffices(postalCode: $postalCode) {
+    query GetPostalOffices($carrier: String!, $postalCode: String!) {
+        postalOffices2(carrier: $carrier, postalCode: $postalCode) {
             id
             name
         }
     }
 `;
 
-export default postalCode =>
+export default (postalCode, carrier) =>
     useQuery(GET_POSTAL_OFFICES, {
         variables: {
             postalCode,
+            carrier,
         },
     });
