@@ -50,10 +50,15 @@ const Confirm = ({
     blockCheckoutForPayment,
     refetch,
 }) => {
-    const { loading, data, refetch: refetchCards } = useQuery(getCardsQuery, {
+    const {
+        loading,
+        data,
+        refetch: refetchCards,
+    } = useQuery(getCardsQuery, {
         errorPolicy: 'all',
     });
-    const stripeCards = data && data.auth ? data.auth.user.stripeCards : [];
+    const stripeCards =
+        data && data.auth && data.auth.user ? data.auth.user.stripeCards : [];
     const { t } = useTranslation();
     const [status, setStatus] = React.useState({ error: null, loading: false });
     const stripeVariables = useStripeVariables(stripeCards, refetchCards);
