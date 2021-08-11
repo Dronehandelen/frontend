@@ -55,11 +55,6 @@ const ClientHeader = ({ data }) => {
                 height,
             }}
         >
-            <div className="bg-warning text-center p-1">
-                Vi er på ferie fra og med fredag 23. juli til og med 9. august,
-                og alle bestillinger som er gjort i dette tidsrommet vil bli
-                sendt tirsdag 10. august.
-            </div>
             <div className="mb-3" ref={ref}>
                 <div className="d-block d-lg-none">
                     <ClientMobileHeader
