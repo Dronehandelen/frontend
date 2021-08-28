@@ -4,6 +4,7 @@ import tracking from '../../helpers/tracking';
 import ClientMobileHeader from './ClientMobileHeader';
 import ClientDesktopHeader from './ClientDesktopHeader';
 import headerContext from '../../contexts/header.js';
+import Sales from '../../routes/Home/Sales';
 
 const ClientHeader = ({ data }) => {
     const ref = React.useRef();
@@ -56,6 +57,7 @@ const ClientHeader = ({ data }) => {
             }}
         >
             <div className="mb-3" ref={ref}>
+                <Sales />
                 <div className="d-block d-lg-none">
                     <ClientMobileHeader
                         onLinkClick={onLinkClick}
